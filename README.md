@@ -1,6 +1,6 @@
-# Project Name
+# dotThen
 
-> Project description
+> An attempt at replicating Spotify's Artist page UI 
 
 ## Related Projects
 
