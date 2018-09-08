@@ -9,15 +9,16 @@
   },
   "scripts": {
     "start": "nodemon server/index.js",
-    "react-dev": "webpack -d --watch"
+    "react-dev": "webpack -d --watch",
+    "seed-data": "node seedDatabase.js"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
     "express": "^4.15.0",
     "faker": "^4.1.0",
+    "fs": "0.0.1-security",
     "jquery": "^3.1.1",
-    "json2csv": "^4.2.1",
     "mongodb": "^3.1.4",
     "mongoose": "^5.2.10",
     "nodemon": "^1.18.4",

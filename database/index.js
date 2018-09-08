@@ -1,21 +1,18 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/artists');
 
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log("We're in!");
-});
 
-const artistSchema = new mongoose.Schema({
-  aristID: Number,
+
+const ArtistSchema = new mongoose.Schema({
+  artistID: Number,
   artistName: String,
   albums: [{
     albumID: Number,
     albumName: String,
     albumImage: String,
     publishedYear: Number,
-    song: [{
+    songs: [{
       songID: Number,
       songName: String,
       streams: Number,
@@ -25,3 +22,8 @@ const artistSchema = new mongoose.Schema({
     }]
   }]
 });
+
+var Artist = mongoose.model('Artist', ArtistSchema);
+
+module.exports.Artist = Artist;
+module.exports.db = db;
