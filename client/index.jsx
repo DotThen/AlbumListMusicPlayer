@@ -6,7 +6,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      artist: ''
+      artist: {},
+      artistName: '',
+      albums: [{albumImage: ""}]
     }
   }
 
@@ -20,7 +22,9 @@ class App extends React.Component {
       url: "/albums",
       success: (data) => {
         this.setState({
-          artist: data[0].artistName
+          artist: data[0],
+          artistName: data[0].artistName,
+          albums: data[0].albums
         })
       }
     })
@@ -29,9 +33,23 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <h1>WE REACT!!</h1>
-        <h2>This is what we got from the server</h2>
-        <h3>{this.state.artist}</h3>
+        <h3>Albums</h3>
+        <hr/>
+        <div>
+          <img src={this.state.albums[0].albumImage} width="150" height="150"/>
+        </div>
+        <div>
+          <table>
+            <tbody>
+              <tr>
+                <td>Test1</td>
+              </tr>
+              <tr>
+                <td>Test3</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }

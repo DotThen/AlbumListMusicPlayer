@@ -1,0 +1,39 @@
+body {
+  background: rgb(34, 33, 33);
+  color: white;
+  font-family: 'Proxima Nova' , sans-serif;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid rgba(73, 73, 73, 0.288);
+  margin: 1em 0;
+  padding: 0; 
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table td {
+  border: 5px solid #E5DADA;
+}
+
+table tr:first-child td {
+  border-top: 0;
+}
+
+table tr:last-child td {
+  border-bottom: 0;
+}
+
+table tr td {
+  border-left: 0;
+  border-right: 0;
+}
+
+td:hover {
+  background-color: #585858;
+}
