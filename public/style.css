@@ -2,6 +2,7 @@ body {
   background: rgb(34, 33, 33);
   color: white;
   font-family: 'Proxima Nova' , sans-serif;
+  margin: 30px;
 }
 
 hr {
@@ -15,18 +16,29 @@ hr {
 
 table {
   border-collapse: collapse;
+  width: 100%;
+}
+
+td {
+  height: 30px;
+}
+
+td #main {
+  width: 20px;
+}
+
+th {
+  height: 30px;
+  text-align: left;
+  font-size: 8pt;
 }
 
 table td {
-  border: 5px solid #E5DADA;
+  border: 1px solid rgba(73, 73, 73, 0.288);
 }
 
 table tr:first-child td {
   border-top: 0;
-}
-
-table tr:last-child td {
-  border-bottom: 0;
 }
 
 table tr td {
@@ -34,6 +46,6 @@ table tr td {
   border-right: 0;
 }
 
-td:hover {
-  background-color: #585858;
+tr:hover {
+  background-color: #42414194;
 }
