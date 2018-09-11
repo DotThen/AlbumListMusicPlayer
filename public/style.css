@@ -21,16 +21,24 @@ table {
 
 td {
   height: 30px;
-}
-
-td #main {
-  width: 20px;
+  color: gray;
+  text-align: center;
 }
 
 th {
   height: 30px;
-  text-align: left;
+  text-align: center;
   font-size: 8pt;
+  color: gray;
+}
+
+#song-name {
+  color: whitesmoke;
+  text-align: left;
+}
+
+#song-name-title {
+  text-align: left;
 }
 
 table td {
@@ -46,6 +54,6 @@ table tr td {
   border-right: 0;
 }
 
-tr:hover {
+#hover-elements:hover {
   background-color: #42414194;
 }
