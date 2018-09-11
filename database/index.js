@@ -25,5 +25,13 @@ const ArtistSchema = new mongoose.Schema({
 
 var Artist = mongoose.model('Artist', ArtistSchema);
 
+var getArtist = (id, cb) => {
+  Artist.find({'artistID': id}, (err, data) => {
+    if (err) throw err;
+    cb(data);
+  })
+}
+
 module.exports.Artist = Artist;
 module.exports.db = db;
+module.exports.getArtist = getArtist;
