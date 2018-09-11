@@ -1,0 +1,59 @@
+body {
+  background: rgb(34, 33, 33);
+  color: white;
+  font-family: 'Proxima Nova' , sans-serif;
+  margin: 30px;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid rgba(73, 73, 73, 0.288);
+  margin: 1em 0;
+  padding: 0; 
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td {
+  height: 30px;
+  color: gray;
+  text-align: center;
+}
+
+th {
+  height: 30px;
+  text-align: center;
+  font-size: 8pt;
+  color: gray;
+}
+
+#song-name {
+  color: whitesmoke;
+  text-align: left;
+}
+
+#song-name-title {
+  text-align: left;
+}
+
+table td {
+  border: 1px solid rgba(73, 73, 73, 0.288);
+}
+
+table tr:first-child td {
+  border-top: 0;
+}
+
+table tr td {
+  border-left: 0;
+  border-right: 0;
+}
+
+#hover-elements:hover {
+  background-color: #42414194;
+}
