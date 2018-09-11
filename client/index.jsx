@@ -36,7 +36,6 @@ class App extends React.Component {
     for (var i = 0; i < this.state.albums.length; i++) {
       albums.push(
         <div>
-          <br/>
           <Album album={this.state.albums[i]}/>
         </div>
       )

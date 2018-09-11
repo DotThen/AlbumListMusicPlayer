@@ -1,5 +1,7 @@
 import React from 'react';
-import Song from './Song.jsx'
+import Song from './Song.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 class Album extends React.Component {
   constructor(props) {
@@ -26,16 +28,23 @@ class Album extends React.Component {
     return (
       <div>
         <div>
-          <img src={this.props.album.albumImage} width="130" height="130"/>
+          <p style={{float: "left"}}><img src={this.props.album.albumImage} width="140" height="140"  border="1px"/></p>
+          <p id="published-year">
+            <br/>
+            <div>{this.props.album.publishedYear}</div>
+            <br/>
+            <div id="album-title">{this.props.album.albumName}</div>
+          </p>
         </div>
+        <br/>
         <table>
           <tbody>
             <tr>
               <th width="30">#</th>
               <th width="50"></th>
               <th id="song-name-title">TITLE</th>
-              <th width="30">time</th>
-              <th width="30">like</th>
+              <th width="30"><FontAwesomeIcon icon={faClock} size="lg"/></th>
+              <th width="50"><FontAwesomeIcon icon={faThumbsUp} size="lg"/></th>
             </tr>
             {this.buildSongs()}
           </tbody>

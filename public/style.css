@@ -1,8 +1,13 @@
+@font-face {
+  font-family: 'Proxima Nova Thin';
+  src: url("../fonts/Mark\ Simonson\ -\ Proxima\ Nova\ Thin-webfont.ttf") format('tff');
+}
+
 body {
-  background: rgb(34, 33, 33);
+  background: rgba(33,33,33);
   color: white;
-  font-family: 'Proxima Nova' , sans-serif;
-  margin: 30px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin: 300px;
 }
 
 hr {
@@ -21,7 +26,7 @@ table {
 
 td {
   height: 30px;
-  color: gray;
+  color: rgba(179,179,179);
   text-align: center;
 }
 
@@ -32,6 +37,18 @@ th {
   color: gray;
 }
 
+#published-year {
+  color: rgba(179,179,179);
+  font-size: 9pt;
+  text-indent: 1em;
+}
+
+#album-title {
+  color: white;
+  font-size: 30pt;
+  font-weight: bold;
+}
+
 #song-name {
   color: whitesmoke;
   text-align: left;
@@ -39,6 +56,10 @@ th {
 
 #song-name-title {
   text-align: left;
+}
+
+#id {
+  font-size: 1pt;
 }
 
 table td {
