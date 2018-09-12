@@ -7,7 +7,7 @@ class Album extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      songPlayingID: 0
     }
   }
 
@@ -18,10 +18,19 @@ class Album extends React.Component {
     }
     for (var i = 0; i < this.props.album.songs.length; i++) {
       songs.push(
-        <Song id={i + 1} song={this.props.album.songs[i]}/>
+        <Song id={i + 1} 
+              song={this.props.album.songs[i]} 
+              updateID={this.updateSongPlayingID.bind(this)}
+              songPlaying={this.state.songPlayingID}/>
       )
     }
     return songs;
+  }
+
+  updateSongPlayingID(id) {
+    this.setState({
+      songPlayingID: id
+    })
   }
 
   render() {
@@ -32,8 +41,8 @@ class Album extends React.Component {
           <p id="published-year">
             <br/>
             <div>{this.props.album.publishedYear}</div>
-            <br/>
             <div id="album-title">{this.props.album.albumName}</div>
+            <button type="button" id="spfy-btn">SAVE</button><button type="button" id="spfy-btn-round">...</button>
           </p>
         </div>
         <br/>

@@ -1,12 +1,23 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBatteryEmpty, faBatteryQuarter, faBatteryHalf, faBatteryThreeQuarters, faBatteryFull } from '@fortawesome/free-solid-svg-icons';
+import { faBatteryEmpty, faBatteryQuarter, faBatteryHalf, faBatteryThreeQuarters, 
+         faBatteryFull, faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons';
 
 class Song extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      idElement: this.props.id,
+      playing: false
+    }
+  }
 
+  componentDidMount() {
+    if (this.props.songPlaying !== this.props.id) {
+      this.setState({
+        idElement: this.props.id,
+        playing: false
+      })
     }
   }
 
@@ -24,10 +35,42 @@ class Song extends React.Component {
     }
   }
 
+  handleMouseOver() {
+    if (!this.state.playing) {
+      this.setState({
+        idElement: <FontAwesomeIcon icon={faPlayCircle} size="lg"/>
+      })
+    }
+  }
+
+  handleMouseOut() {
+    if (!this.state.playing) {
+      this.setState({
+        idElement: this.props.id
+      })
+    }
+  }
+
+  handleClick() {
+    if (!this.state.playing) {
+      this.setState({
+        idElement: <FontAwesomeIcon icon={faPauseCircle} size="lg"/>,
+        playing: true
+      }, () => {this.props.updateID(this.props.id)})
+    } else {
+      this.setState({
+        idElement: <FontAwesomeIcon icon={faPlayCircle} size="lg"/>,
+        playing: false
+      }, () => {this.props.updateID(0)})
+    }
+  }
+
   render() {
     return (
-      <tr id="hover-elements">
-        <td>{this.props.id}</td>
+      <tr id="hover-elements" onMouseOver={this.handleMouseOver.bind(this)} 
+                              onMouseOut={this.handleMouseOut.bind(this)}
+                              onClick={this.handleClick.bind(this)}>
+        <td>{this.state.idElement}</td>
         <td id="plus">+</td>
         <td id="song-name">{this.props.song.songName}</td>
         {this.props.song.length%60 < 10 ? 
@@ -35,7 +78,6 @@ class Song extends React.Component {
           :
           <td>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>
         }
-        {/* <td>{this.props.song.popularity}</td> */}
         {this.popularity()}
       </tr>
     )
