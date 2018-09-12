@@ -30,6 +30,8 @@ class Album extends React.Component {
   updateSongPlayingID(id) {
     this.setState({
       songPlayingID: id
+    }, () => {
+      this.props.update(this.props.id, id);
     })
   }
 

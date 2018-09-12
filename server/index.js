@@ -12,7 +12,6 @@ server.use(express.static(path.join(__dirname, '../public')));
 server.get('/albums', (req, res) => {
   var artistId = Math.floor(Math.random() * 100) + 1;
   getArtist(artistId, (data) => {
-    console.log(data[0].albums);
     res.send(data);
   })
 });

@@ -12,12 +12,31 @@ class Song extends React.Component {
     }
   }
 
-  componentDidMount() {
-    if (this.props.songPlaying !== this.props.id) {
-      this.setState({
+  componentWillReceiveProps() {
+    this.update();
+  }
+
+  update() {
+    if (this.props.songPlaying !== this.props.id && this.props.songPlaying !== 0) {
+      this.setState ({
         idElement: this.props.id,
         playing: false
-      })
+      });
+    } else if (this.props.songPlaying === this.props.id) {
+      this.setState ({
+        idElement: <FontAwesomeIcon icon={faPauseCircle} size="lg"/>,
+        playing: true
+      });
+    } else if (this.state.playing === true) {
+      this.setState ({
+        idElement: <FontAwesomeIcon icon={faPlayCircle} size="lg"/>,
+        playing: false
+      });
+    } else {
+      this.setState ({
+        idElement: this.props.id,
+        playing: false
+      });
     }
   }
 
@@ -56,12 +75,12 @@ class Song extends React.Component {
       this.setState({
         idElement: <FontAwesomeIcon icon={faPauseCircle} size="lg"/>,
         playing: true
-      }, () => {this.props.updateID(this.props.id)})
+      }, () => {this.props.updateID(this.props.id, this.update.bind(this))})
     } else {
       this.setState({
         idElement: <FontAwesomeIcon icon={faPlayCircle} size="lg"/>,
         playing: false
-      }, () => {this.props.updateID(0)})
+      }, () => {this.props.updateID(0, this.update.bind(this))})
     }
   }
 

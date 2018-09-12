@@ -9,7 +9,9 @@ class App extends React.Component {
     this.state = {
       artist: {},
       artistName: '',
-      albums: [{albumImage: ""}]
+      albums: [{albumImage: ""}],
+      albumPlayingID: 0,
+      songPlayingID: 0
     }
   }
 
@@ -31,12 +33,26 @@ class App extends React.Component {
     })
   }
 
+  updateAlbumSongPlaying(albumID, songID) {
+    if (songID === 0) {
+      this.setState({
+        albumPlayingID: 0,
+        songPlayingID: 0
+      });
+    } else {
+      this.setState({
+        albumPlayingID: albumID,
+        songPlayingID: songID
+      });
+    }
+  }
+
   buildAlbums() {
     var albums = [];
     for (var i = 0; i < this.state.albums.length; i++) {
       albums.push(
         <div>
-          <Album album={this.state.albums[i]}/>
+          <Album album={this.state.albums[i]} id={i+1} update={this.updateAlbumSongPlaying.bind(this)}/>
         </div>
       )
     }
