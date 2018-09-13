@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBatteryEmpty, faBatteryQuarter, faBatteryHalf, faBatteryThreeQuarters, 
-         faBatteryFull, faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons';
+import { faThermometerEmpty, faThermometerQuarter, faThermometerHalf, faThermometerThreeQuarters, 
+         faThermometerFull, faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons';
 
 class Song extends React.Component {
   constructor(props) {
@@ -44,15 +44,15 @@ class Song extends React.Component {
 
   popularity() {
     if (this.props.song.popularity < 2) {
-      return <td><FontAwesomeIcon icon={faBatteryEmpty} size="lg"/></td>
+      return <td><FontAwesomeIcon icon={faThermometerEmpty} size="lg"/></td>
     } else if (this.props.song.popularity < 4) {
-      return <td><FontAwesomeIcon icon={faBatteryQuarter} size="lg"/></td>
+      return <td><FontAwesomeIcon icon={faThermometerQuarter} size="lg"/></td>
     } else if (this.props.song.popularity === 4) {
-      return <td><FontAwesomeIcon icon={faBatteryHalf} size="lg"/></td>
+      return <td><FontAwesomeIcon icon={faThermometerHalf} size="lg"/></td>
     } else if (this.props.song.popularity < 7) {
-      return <td><FontAwesomeIcon icon={faBatteryThreeQuarters} size="lg"/></td>
+      return <td><FontAwesomeIcon icon={faThermometerThreeQuarters} size="lg"/></td>
     } else {
-      return <td><FontAwesomeIcon icon={faBatteryFull} size="lg"/></td>
+      return <td><FontAwesomeIcon icon={faThermometerFull} size="lg"/></td>
     }
   }
 
