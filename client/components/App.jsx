@@ -8,7 +8,7 @@ class App extends React.Component {
     this.state = {
       artist: {},
       artistName: '',
-      albums: [{albumImage: ""}],
+      albums: [{albumImage: "", songs: []}],
       albumPlayingID: 0,
       songPlayingID: 0
     }
@@ -21,7 +21,7 @@ class App extends React.Component {
   getAllArtists() {
     $.ajax({
       method: "GET",
-      url: "/albums",
+      url: "/artists",
       success: (data) => {
         this.setState({
           artist: data[0],

@@ -9,23 +9,25 @@ class Song extends React.Component {
     this.state = {
       idElement: this.props.id,
       playing: false,
-      inLibrary: this.props.song.addedToLibrary
+      inLibrary: this.props.addedToLibrary
     }
   }
 
-  componentWillReceiveProps() {
-    if ( (this.props.originalAlbum !== this.props.albumPlaying || this.props.currentAlbumPlaying === false) && this.props.albumPlaying !== 0) {
-    // if (this.props.currentAlbumPlaying === false && this.props.originalAlbum !== this.props.albumPlaying && this.props.albumPlaying !== 0) {
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      inLibrary: nextProps.addedToLibrary
+    });
+    if ( nextProps.originalAlbum !== nextProps.albumPlaying && nextProps.albumPlaying !== 0) {
       this.setState ({
         idElement: this.props.id,
         playing: false
       });
-    } else if (this.props.songPlaying !== this.props.id && this.props.songPlaying !== 0) {
+    } else if (nextProps.songPlaying !== this.props.id && nextProps.songPlaying !== 0) {
       this.setState ({
         idElement: this.props.id,
         playing: false
       });
-    } else if (this.props.songPlaying === this.props.id) {
+    } else if (nextProps.songPlaying === this.props.id) {
       this.setState ({
         idElement: <FontAwesomeIcon icon={faPauseCircle} size="lg"/>,
         playing: true
@@ -94,13 +96,13 @@ class Song extends React.Component {
 
   inLibraryCheck() {
     if (this.state.inLibrary) {
-      return <td id="plus" onClick={this.changeInLibrary.bind(this)}><FontAwesomeIcon icon={faCheck} size="sm"/></td>;
+      return <td id="plus" onClick={this.handleChangeInLibraryClick.bind(this)}><FontAwesomeIcon icon={faCheck} size="sm"/></td>;
     } else {
-      return <td id="plus" onClick={this.changeInLibrary.bind(this)}><FontAwesomeIcon icon={faPlus} size="sm"/></td>;
+      return <td id="plus" onClick={this.handleChangeInLibraryClick.bind(this)}><FontAwesomeIcon icon={faPlus} size="sm"/></td>;
     }
   }
 
-  changeInLibrary() {
+  handleChangeInLibraryClick() {
     this.setState({
       inLibrary: !this.state.inLibrary
     })
