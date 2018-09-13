@@ -13,11 +13,13 @@ class Song extends React.Component {
   }
 
   componentWillReceiveProps() {
-    this.update();
-  }
-
-  update() {
-    if (this.props.songPlaying !== this.props.id && this.props.songPlaying !== 0) {
+    if ( (this.props.originalAlbum !== this.props.albumPlaying || this.props.currentAlbumPlaying === false) && this.props.albumPlaying !== 0) {
+    // if (this.props.currentAlbumPlaying === false && this.props.originalAlbum !== this.props.albumPlaying && this.props.albumPlaying !== 0) {
+      this.setState ({
+        idElement: this.props.id,
+        playing: false
+      });
+    } else if (this.props.songPlaying !== this.props.id && this.props.songPlaying !== 0) {
       this.setState ({
         idElement: this.props.id,
         playing: false
@@ -75,12 +77,37 @@ class Song extends React.Component {
       this.setState({
         idElement: <FontAwesomeIcon icon={faPauseCircle} size="lg"/>,
         playing: true
-      }, () => {this.props.updateID(this.props.id, this.update.bind(this))})
+      }, () => {
+        this.props.updateID(this.props.id)
+      })
     } else {
       this.setState({
         idElement: <FontAwesomeIcon icon={faPlayCircle} size="lg"/>,
         playing: false
-      }, () => {this.props.updateID(0, this.update.bind(this))})
+      }, () => {
+        this.props.updateID(0)
+      })
+    }
+  }
+
+  coloredTitle() {  // This is not working, color needs to re-render but it is not....
+    var results = [];
+    if (this.state.idElement === <FontAwesomeIcon icon={faPauseCircle} size="lg"/>) {
+      results.push(<td id="song-name" style={{color: 'green'}}>{this.props.song.songName}</td>);
+      if (this.props.song.length%60 < 10) {
+        results.push(<td style={{color: 'green'}}>{Math.floor(this.props.song.length/60)}:0{this.props.song.length%60}</td>);
+      } else {
+        results.push(<td style={{color: 'green'}}>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>);
+      }
+      return results;
+    } else {
+      results.push(<td id="song-name">{this.props.song.songName}</td>);
+      if (this.props.song.length%60 < 10) {
+        results.push(<td>{Math.floor(this.props.song.length/60)}:0{this.props.song.length%60}</td>);
+      } else {
+        results.push(<td>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>);
+      }
+      return results;
     }
   }
 
@@ -91,12 +118,7 @@ class Song extends React.Component {
                               onClick={this.handleClick.bind(this)}>
         <td>{this.state.idElement}</td>
         <td id="plus">+</td>
-        <td id="song-name">{this.props.song.songName}</td>
-        {this.props.song.length%60 < 10 ? 
-          <td>{Math.floor(this.props.song.length/60)}:0{this.props.song.length%60}</td>
-          :
-          <td>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>
-        }
+        {this.coloredTitle()}
         {this.popularity()}
       </tr>
     )

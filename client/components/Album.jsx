@@ -7,8 +7,21 @@ class Album extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      songPlayingID: 0
+      songPlayingID: 0,
+      idElement: this.props.id,
+      playing: false
     }
+  }
+
+  componentWillReceiveProps() {
+    this.updatePlaying();
+  }
+
+  updatePlaying() {
+    var areWePlaying = (this.props.albumPlaying === this.props.id);
+    this.setState({
+      playing: areWePlaying
+    })
   }
 
   buildSongs() {
@@ -21,18 +34,27 @@ class Album extends React.Component {
         <Song id={i + 1} 
               song={this.props.album.songs[i]} 
               updateID={this.updateSongPlayingID.bind(this)}
-              songPlaying={this.state.songPlayingID}/>
+              songPlaying={this.state.songPlayingID}
+              originalAlbum={this.state.idElement}
+              albumPlaying={this.props.albumPlaying}
+              currentAlbumPlaying={this.state.playing}/>
       )
     }
     return songs;
   }
 
   updateSongPlayingID(id) {
-    this.setState({
-      songPlayingID: id
-    }, () => {
-      this.props.update(this.props.id, id);
-    })
+    if (id === 0) {
+      this.setState({
+        songPlayingID: id,
+        playing: false
+      }, () => {this.props.update(0, 0)})
+    } else {
+      this.setState({
+        songPlayingID: id,
+        playing: true
+      }, () => {this.props.update(this.props.id, id)})
+    }
   }
 
   render() {
