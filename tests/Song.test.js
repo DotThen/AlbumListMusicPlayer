@@ -4,8 +4,8 @@ import Song from '../client/components/Song.jsx';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import 'jest-enzyme';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlayCircle } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 configure({ adapter: new Adapter() });
 
 it('renders without crashing', () => {
