@@ -1,14 +1,15 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThermometerEmpty, faThermometerQuarter, faThermometerHalf, faThermometerThreeQuarters, 
-         faThermometerFull, faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons';
+         faThermometerFull, faPlayCircle, faPauseCircle, faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 class Song extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       idElement: this.props.id,
-      playing: false
+      playing: false,
+      inLibrary: this.props.song.addedToLibrary
     }
   }
 
@@ -72,13 +73,14 @@ class Song extends React.Component {
     }
   }
 
-  handleClick() {
+  handlePlayClick() {
     if (!this.state.playing) {
       this.setState({
         idElement: <FontAwesomeIcon icon={faPauseCircle} size="lg"/>,
         playing: true
       }, () => {
-        this.props.updateID(this.props.id)
+        this.props.updateID(this.props.id);
+        this.forceUpdate();
       })
     } else {
       this.setState({
@@ -90,22 +92,36 @@ class Song extends React.Component {
     }
   }
 
-  coloredTitle() {  // This is not working, color needs to re-render but it is not....
+  inLibraryCheck() {
+    if (this.state.inLibrary) {
+      return <td id="plus" onClick={this.changeInLibrary.bind(this)}><FontAwesomeIcon icon={faCheck} size="sm"/></td>;
+    } else {
+      return <td id="plus" onClick={this.changeInLibrary.bind(this)}><FontAwesomeIcon icon={faPlus} size="sm"/></td>;
+    }
+  }
+
+  changeInLibrary() {
+    this.setState({
+      inLibrary: !this.state.inLibrary
+    })
+  }
+
+  coloredTitle() {  // This is not working, color needs to re-render but it is not...
     var results = [];
     if (this.state.idElement === <FontAwesomeIcon icon={faPauseCircle} size="lg"/>) {
-      results.push(<td id="song-name" style={{color: 'green'}}>{this.props.song.songName}</td>);
+      results.push(<td id="song-name" onClick={this.handlePlayClick.bind(this)} style={{color: 'green'}}>{this.props.song.songName}</td>);
       if (this.props.song.length%60 < 10) {
-        results.push(<td style={{color: 'green'}}>{Math.floor(this.props.song.length/60)}:0{this.props.song.length%60}</td>);
+        results.push(<td onClick={this.handlePlayClick.bind(this)} style={{color: 'green'}}>{Math.floor(this.props.song.length/60)}:0{this.props.song.length%60}</td>);
       } else {
-        results.push(<td style={{color: 'green'}}>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>);
+        results.push(<td onClick={this.handlePlayClick.bind(this)} style={{color: 'green'}}>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>);
       }
       return results;
     } else {
-      results.push(<td id="song-name">{this.props.song.songName}</td>);
+      results.push(<td id="song-name" onClick={this.handlePlayClick.bind(this)}>{this.props.song.songName}</td>);
       if (this.props.song.length%60 < 10) {
-        results.push(<td>{Math.floor(this.props.song.length/60)}:0{this.props.song.length%60}</td>);
+        results.push(<td onClick={this.handlePlayClick.bind(this)}>{Math.floor(this.props.song.length/60)}:0{this.props.song.length%60}</td>);
       } else {
-        results.push(<td>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>);
+        results.push(<td onClick={this.handlePlayClick.bind(this)}>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>);
       }
       return results;
     }
@@ -114,10 +130,9 @@ class Song extends React.Component {
   render() {
     return (
       <tr id="hover-elements" onMouseOver={this.handleMouseOver.bind(this)} 
-                              onMouseOut={this.handleMouseOut.bind(this)}
-                              onClick={this.handleClick.bind(this)}>
-        <td>{this.state.idElement}</td>
-        <td id="plus">+</td>
+                              onMouseOut={this.handleMouseOut.bind(this)}>
+        <td onMouseOver={this.handleMouseOver.bind(this)} onMouseOut={this.handleMouseOut.bind(this)}>{this.state.idElement}</td>
+        {this.inLibraryCheck()}
         {this.coloredTitle()}
         {this.popularity()}
       </tr>
