@@ -12,7 +12,8 @@ class Album extends React.Component {
       saveClicked: false,
       unsaveAll: false,
       library: [],
-      dropdownOpen: false
+      dropdownOpen: false,
+      saveButton: "SAVE"
     }
     this.toggle = this.toggle.bind(this);
   }
@@ -33,14 +34,16 @@ class Album extends React.Component {
     })
   }
 
-  componentWillReceiveProps(newProps) {
-    var songsInLibrary = [];
-    for (var i = 0; i < newProps.album.songs.length; i++) {
-      songsInLibrary.push(newProps.album.songs[i].addedToLibrary);
+  componentDidUpdate() {
+    if (this.state.library.length === 0 && this.props.album.songs.length !== 0) {
+      var songsInLibrary = [];
+      for (var i = 0; i < this.props.album.songs.length; i++) {
+        songsInLibrary.push(this.props.album.songs[i].addedToLibrary);
+      }
+      this.setState({
+        library: songsInLibrary
+      })
     }
-    this.setState({
-      library: songsInLibrary
-    })
   }
 
   handleLibraryClick(id, status) {
@@ -57,56 +60,19 @@ class Album extends React.Component {
       return songs;
     }
     for (var i = 0; i < this.props.album.songs.length; i++) {
-      if (!this.state.saveClicked && !this.state.unsaveAll) {
-        songs.push(
-          <Song id={i + 1} 
-                song={this.props.album.songs[i]} 
-                updateID={this.updateSongPlayingID.bind(this)}
-                songPlaying={this.state.songPlayingID}
-                originalAlbum={this.state.idElement}
-                albumPlaying={this.props.albumPlaying}
-                addedToLibrary={this.state.library[i]}
-                handleLibraryClick={this.handleLibraryClick.bind(this)}/>
-        )
-      } else { 
-        var inLibraryFlag = false;
-        if (this.state.saveClicked && !this.state.unsaveAll) {
-          inLibraryFlag = true;
-        }
-        songs.push(
-          <Song id={i + 1} 
-                song={this.props.album.songs[i]} 
-                updateID={this.updateSongPlayingID.bind(this)}
-                songPlaying={this.state.songPlayingID}
-                originalAlbum={this.state.idElement}
-                albumPlaying={this.props.albumPlaying}
-                addedToLibrary={inLibraryFlag}
-                handleLibraryClick={this.handleLibraryClick.bind(this)}/>
-        )
-      }
+      songs.push(
+        <Song id={i + 1} 
+              song={this.props.album.songs[i]} 
+              updateID={this.updateSongPlayingID.bind(this)}
+              songPlaying={this.state.songPlayingID}
+              originalAlbum={this.state.idElement}
+              albumPlaying={this.props.albumPlaying}
+              addedToLibrary={this.state.library[i]}
+              handleLibraryClick={this.handleLibraryClick.bind(this)}/>
+      )
     }
     return songs;
   }
-
-  // buildSongs() {
-  //   var songs = [];
-  //   if (this.props.album.albumImage === '') {
-  //     return songs;
-  //   }
-  //   for (var i = 0; i < this.props.album.songs.length; i++) {
-  //     songs.push(
-  //       <Song id={i + 1} 
-  //             song={this.props.album.songs[i]} 
-  //             updateID={this.updateSongPlayingID.bind(this)}
-  //             songPlaying={this.state.songPlayingID}
-  //             originalAlbum={this.state.idElement}
-  //             albumPlaying={this.props.albumPlaying}
-  //             addedToLibrary={this.state.library[i]}
-  //             handleLibraryClick={this.handleLibraryClick.bind(this)}/>
-  //     )
-  //   }
-  //   return songs;
-  // }
 
   updateSongPlayingID(id) {
     if (id === 0) {
@@ -123,39 +89,38 @@ class Album extends React.Component {
   }
 
   handleSaveClick() {
+    var newLib = [];
     if (!this.state.saveClicked && !this.state.unsaveAll) {
+      for (var i = 0; i < this.state.library.length; i++) {
+        newLib.push(true);
+      }
       this.setState({
-        saveClicked: true
+        saveClicked: true,
+        saveButton: "SAVED",
+        library: newLib
+      })
+    } else if (!this.state.saveClicked && this.state.unsaveAll){
+      for (var i = 0; i < this.state.library.length; i++) {
+        newLib.push(true);
+      }
+      this.setState({
+        saveClicked: true,
+        unsaveAll: false,
+        saveButton: "SAVED",
+        library: newLib
       })
     } else {
+      for (var i = 0; i < this.state.library.length; i++) {
+        newLib.push(false);
+      }
       this.setState({
-        saveClicked: !this.state.saveClicked,
-        unsaveAll: !this.state.unsaveAll
+        saveClicked: false,
+        unsaveAll: true,
+        saveButton: "SAVE",
+        library: newLib
       })
     }
   }
-
-  // handleSaveClick() {
-  //   if (!this.state.saveClicked) {
-  //     var newLibrary = [];
-  //     for (var i = 0; i < this.state.library.length; i++) {
-  //       newLibrary.push(true);
-  //     }
-  //     this.setState({
-  //       saveClicked: true,
-  //       library: newLibrary
-  //     })
-  //   } else {
-  //     var newLibrary = [];
-  //     for (var i = 0; i < this.state.library.length; i++) {
-  //       newLibrary.push(false);
-  //     }
-  //     this.setState({
-  //       saveClicked: false,
-  //       library: newLibrary
-  //     })
-  //   }
-  // }
 
   render() {
     return (
@@ -166,7 +131,11 @@ class Album extends React.Component {
             <br/>
             <div>{this.props.album.publishedYear}</div>
             <div id="album-title">{this.props.album.albumName}</div>
-            <button type="button" id="spfy-btn" onClick={this.handleSaveClick.bind(this)}>SAVE</button>
+            {this.state.saveButton === "SAVED" ?
+              <button type="button" id="spfy-btn" onClick={this.handleSaveClick.bind(this)} style={{color: 'rgb(29,185,84)'}}>SAVED</button>
+              :
+              <button type="button" id="spfy-btn" onClick={this.handleSaveClick.bind(this)}>SAVE</button>
+            }
             <button type="button" id="spfy-btn-round">...</button>
           </p>
         </div>

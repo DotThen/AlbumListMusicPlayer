@@ -13,6 +13,8 @@ class App extends React.Component {
       albumPlayingID: 0,
       songPlayingID: 0
     }
+    var artistId = Math.floor(Math.random() * 100) + 1;
+    this.getAllArtists(artistId);
   }
 
   componentDidMount() {

@@ -148,9 +148,10 @@ class Song extends React.Component {
   }
 
   handleChangeInLibraryClick() {
+    var newStateInLibrary = !this.state.inLibrary;
     this.setState({
-      inLibrary: !this.state.inLibrary
-    })
+      inLibrary: newStateInLibrary
+    }, () => this.props.handleLibraryClick(this.props.id, newStateInLibrary))
   }
 
   coloredTitle() {  // This is not working, color needs to re-render but it is not...
