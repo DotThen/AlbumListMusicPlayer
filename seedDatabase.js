@@ -1,6 +1,7 @@
 const {db, Artist} = require('./database/index.js');
 const faker = require('faker');
 const fs = require('fs');
+const coolImages = require('cool-images');
 
 
 var allArtists = [];
@@ -16,7 +17,7 @@ for (let i = 1; i < 101; i++) {
     let album = {
       albumID: i * 10 + j,
       albumName: faker.random.words(),
-      albumImage: faker.random.image(),
+      albumImage: coolImages.one(400, 400),
       publishedYear: Math.floor(Math.random() * 69) + 1950,
       songs: []
     }
