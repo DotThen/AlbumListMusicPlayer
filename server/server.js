@@ -9,9 +9,8 @@ server.use(bodyParser.json());
 server.use(express.urlencoded({extended: true}));
 server.use(express.static(path.join(__dirname, '../public')));
 
-server.get('/artists', (req, res) => {
-  var artistId = Math.floor(Math.random() * 100) + 1;
-  getArtist(artistId, (data) => {
+server.get('/artists/:artistID', (req, res) => {
+  getArtist(req.params.artistID, (data) => {
     res.send(data);
   })
 });

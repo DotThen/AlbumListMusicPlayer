@@ -7,23 +7,17 @@ import 'jest-enzyme';
 configure({ adapter: new Adapter() });
 
 it('renders without crashing', () => {
-  shallow(<Album album={{albumImage: ""}}/>);
-});
-
-it('renders save button', () => {
-  const wrapper = shallow(<Album album={{albumImage: ""}}/>);
-  const save = <button type="button" id="spfy-btn">SAVE</button>;
-  expect(wrapper).toContainReact(save);
+  shallow(<Album album={{albumImage: "", songs: []}}/>);
 });
 
 it('renders ... button', () => {
-  const wrapper = shallow(<Album album={{albumImage: ""}}/>);
+  const wrapper = shallow(<Album album={{albumImage: "", songs: []}}/>);
   const btn = <button type="button" id="spfy-btn-round">...</button>;
   expect(wrapper).toContainReact(btn);
 });
 
 it('renders save button', () => {
-  const wrapper = shallow(<Album album={{albumImage: ""}} update={() => console.log("Hi")}/>);
+  const wrapper = shallow(<Album album={{albumImage: "", songs: []}} update={() => console.log("Hi")}/>);
   expect(wrapper.state('songPlayingID')).toBe(0);
   wrapper.instance().updateSongPlayingID(4);
   expect(wrapper.state('songPlayingID')).toBe(4);

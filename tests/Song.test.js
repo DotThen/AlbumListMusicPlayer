@@ -9,31 +9,25 @@ import 'jest-enzyme';
 configure({ adapter: new Adapter() });
 
 it('renders without crashing', () => {
-  shallow(<Song song={{songName: ""}} />);
-});
-
-it('renders + button', () => {
-  const wrapper = shallow(<Song song={{songName: ""}} />);
-  const plus = <td id="plus">+</td>;
-  expect(wrapper).toContainReact(plus);
+  shallow(<Song song={{songName: "", streams: 0}} />);
 });
 
 it('renders updated playing flag after click', () => {
-  const wrapper = shallow(<Song song={{songName: ""}} id={3} songPlaying={3} updateID={() => console.log("Hi")}/>);
+  const wrapper = shallow(<Song song={{songName: "", streams: 0}} id={3} songPlaying={3} updateID={() => console.log("Hi")}/>);
   expect(wrapper.state('playing')).toBe(false);
-  wrapper.instance().handleClick();
+  wrapper.instance().handlePlayClick();
   expect(wrapper.state('playing')).toBe(true);
 });
 
 it('renders updated playing flag after receiving props', () => {
-  const wrapper = shallow(<Song song={{songName: ""}} id={3} songPlaying={3} updateID={() => console.log("Hi")} originalAlbum={3} albumPlaying={3} currentAlbumPlaying={true}/>);
+  const wrapper = shallow(<Song song={{songName: "", streams: 0}} id={3} songPlaying={3} updateID={() => console.log("Hi")} originalAlbum={3} albumPlaying={3} currentAlbumPlaying={true}/>);
   expect(wrapper.state('playing')).toBe(false);
   wrapper.instance().componentWillReceiveProps();
   expect(wrapper.state('playing')).toBe(true);
 });
 
 it('renders save button', () => {
-  const wrapper = shallow(<Song song={{songName: ""}} id={2} songPlaying={3} updateID={() => console.log("Hi")} originalAlbum={3} albumPlaying={3} currentAlbumPlaying={true}/>);
+  const wrapper = shallow(<Song song={{songName: "", streams: 0}} id={2} songPlaying={3} updateID={() => console.log("Hi")} originalAlbum={3} albumPlaying={3} currentAlbumPlaying={true}/>);
   expect(wrapper.state('idElement')).toBe(2);
   wrapper.instance().componentWillReceiveProps();
   expect(wrapper.state('idElement')).toBe(2);

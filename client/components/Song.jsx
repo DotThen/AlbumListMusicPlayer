@@ -47,15 +47,60 @@ class Song extends React.Component {
 
   popularity() {
     if (this.props.song.popularity < 2) {
-      return <td><FontAwesomeIcon icon={faThermometerEmpty} size="lg"/></td>
+      return(
+        <td>
+          <div className="dropdown">
+            <FontAwesomeIcon icon={faThermometerEmpty} size="lg"/>
+            <div className="dropdown-content">
+              {this.props.song.streams.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} plays
+            </div>
+          </div>
+        </td>
+      )
     } else if (this.props.song.popularity < 4) {
-      return <td><FontAwesomeIcon icon={faThermometerQuarter} size="lg"/></td>
+      return(
+        <td>
+          <div className="dropdown">
+            <FontAwesomeIcon icon={faThermometerQuarter} size="lg"/>
+            <div className="dropdown-content">
+              {this.props.song.streams.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} plays
+            </div>
+          </div>
+        </td>
+      )
     } else if (this.props.song.popularity === 4) {
-      return <td><FontAwesomeIcon icon={faThermometerHalf} size="lg"/></td>
+      return(
+        <td>
+          <div className="dropdown">
+            <FontAwesomeIcon icon={faThermometerHalf} size="lg"/>
+            <div className="dropdown-content">
+              {this.props.song.streams.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} plays
+            </div>
+          </div>
+        </td>
+      )
     } else if (this.props.song.popularity < 7) {
-      return <td><FontAwesomeIcon icon={faThermometerThreeQuarters} size="lg"/></td>
+      return(
+        <td>
+          <div className="dropdown">
+            <FontAwesomeIcon icon={faThermometerThreeQuarters} size="lg"/>
+            <div className="dropdown-content">
+              {this.props.song.streams.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} plays
+            </div>
+          </div>
+        </td>
+      )
     } else {
-      return <td><FontAwesomeIcon icon={faThermometerFull} size="lg"/></td>
+      return(
+        <td>
+          <div className="dropdown">
+            <FontAwesomeIcon icon={faThermometerFull} size="lg"/>
+            <div className="dropdown-content">
+              {this.props.song.streams.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} plays
+            </div>
+          </div>
+        </td>
+      )
     }
   }
 

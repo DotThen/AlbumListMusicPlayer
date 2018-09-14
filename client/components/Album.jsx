@@ -11,8 +11,16 @@ class Album extends React.Component {
       idElement: this.props.id,
       saveClicked: false,
       unsaveAll: false,
-      library: []
+      library: [],
+      dropdownOpen: false
     }
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
   }
 
   componentDidMount() {
@@ -35,7 +43,7 @@ class Album extends React.Component {
     })
   }
 
-  handleLiraryClick(id, status) {
+  handleLibraryClick(id, status) {
     var newLibrary = this.state.library;
     newLibrary[id-1] = status;
     this.setState({
@@ -58,7 +66,7 @@ class Album extends React.Component {
                 originalAlbum={this.state.idElement}
                 albumPlaying={this.props.albumPlaying}
                 addedToLibrary={this.state.library[i]}
-                handleLiraryClick={this.handleLiraryClick.bind(this)}/>
+                handleLibraryClick={this.handleLibraryClick.bind(this)}/>
         )
       } else { 
         var inLibraryFlag = false;
@@ -73,7 +81,7 @@ class Album extends React.Component {
                 originalAlbum={this.state.idElement}
                 albumPlaying={this.props.albumPlaying}
                 addedToLibrary={inLibraryFlag}
-                handleLiraryClick={this.handleLiraryClick.bind(this)}/>
+                handleLibraryClick={this.handleLibraryClick.bind(this)}/>
         )
       }
     }
@@ -94,7 +102,7 @@ class Album extends React.Component {
   //             originalAlbum={this.state.idElement}
   //             albumPlaying={this.props.albumPlaying}
   //             addedToLibrary={this.state.library[i]}
-  //             handleLiraryClick={this.handleLiraryClick.bind(this)}/>
+  //             handleLibraryClick={this.handleLibraryClick.bind(this)}/>
   //     )
   //   }
   //   return songs;
@@ -152,7 +160,7 @@ class Album extends React.Component {
   render() {
     return (
       <div>
-        <div>
+        <div className="album-header">
           <p style={{float: "left"}}><img src={this.props.album.albumImage} width="140" height="140"  border="1px"/></p>
           <p id="published-year">
             <br/>

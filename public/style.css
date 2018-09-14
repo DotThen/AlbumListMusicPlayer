@@ -1,5 +1,5 @@
 body {
-  background: rgba(33,33,33);
+  background: rgb(25, 25, 25);
   color: white;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
@@ -123,4 +123,31 @@ table tr td {
   -webkit-transform:scale(1.1,1.1);
   -moz-transform:scale(1.1,1.1);
   border: 1.4px solid white;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgb(32, 32, 32);
+  border-radius: 5px;
+  width: max-content;
+  height: 23px;
+  box-shadow: 0px 10px 50px 3px rgb(0, 0, 0);
+  padding: 3px 9px;
+  left: 0px;
+  font-size: 11pt;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.album-header {
+  padding-bottom: 50px;
 }

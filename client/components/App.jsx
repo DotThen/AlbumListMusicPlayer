@@ -7,6 +7,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       artist: {},
+      artistID: 0,
       artistName: '',
       albums: [{albumImage: "", songs: []}],
       albumPlayingID: 0,
@@ -15,16 +16,18 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getAllArtists();
+    var artistId = Math.floor(Math.random() * 100) + 1;
+    this.getAllArtists(artistId);
   }
 
-  getAllArtists() {
+  getAllArtists(artistId) {
     $.ajax({
       method: "GET",
-      url: "/artists",
+      url: "/artists/" + artistId,
       success: (data) => {
         this.setState({
           artist: data[0],
+          artistID: artistId,
           artistName: data[0].artistName,
           albums: data[0].albums
         })
