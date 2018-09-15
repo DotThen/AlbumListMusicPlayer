@@ -1,7 +1,9 @@
 import React from 'react';
 import Song from './Song.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faThumbsUp, faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons';
+import Dropdown from 'rc-dropdown';
+import Menu, { Item as MenuItem, Divider } from 'rc-menu';
 
 class Album extends React.Component {
   constructor(props) {
@@ -91,7 +93,7 @@ class Album extends React.Component {
   handleSaveClick() {
     var newLib = [];
     if (!this.state.saveClicked && !this.state.unsaveAll) {
-      for (var i = 0; i < this.state.library.length; i++) {
+      for (var i = 0; i < this.props.album.songs.length; i++) {
         newLib.push(true);
       }
       this.setState({
@@ -100,7 +102,7 @@ class Album extends React.Component {
         library: newLib
       })
     } else if (!this.state.saveClicked && this.state.unsaveAll){
-      for (var i = 0; i < this.state.library.length; i++) {
+      for (var i = 0; i < this.props.album.songs.length; i++) {
         newLib.push(true);
       }
       this.setState({
@@ -110,7 +112,7 @@ class Album extends React.Component {
         library: newLib
       })
     } else {
-      for (var i = 0; i < this.state.library.length; i++) {
+      for (var i = 0; i < this.props.album.songs.length; i++) {
         newLib.push(false);
       }
       this.setState({
@@ -122,11 +124,40 @@ class Album extends React.Component {
     }
   }
 
+  playbuttonAlbumCover() {
+    if (this.state.playing) {
+      return <div className="middle-album-image-text" onClick={this.handleAlbumImagePlayClick.bind(this)}><FontAwesomeIcon icon={faPauseCircle} size="5x"/></div>
+    } else {
+      return <div className="middle-album-image-text" onClick={this.handleAlbumImagePlayClick.bind(this)}><FontAwesomeIcon icon={faPlayCircle} size="5x"/></div>
+    }
+  }
+
+  handleAlbumImagePlayClick() {
+    if (this.state.playing) {
+      this.setState({
+        songPlayingID: 0,
+        playing: false
+      }, () => this.props.update(0, 0))
+    } else {
+      this.setState({
+        songPlayingID: 1,
+        playing: true
+      }, () => this.props.update(this.props.id, 1))
+    }
+  }
+
   render() {
     return (
       <div>
         <div className="album-header">
-          <p style={{float: "left"}}><img src={this.props.album.albumImage} width="140" height="140"  border="1px"/></p>
+          <p style={{float: "left"}}>
+            <div className="container-album-image-play">
+              <img src={this.props.album.albumImage} width="140" height="140"  border="1px" className="album-image"/>
+              <div className="middle-album-image">
+                {this.playbuttonAlbumCover()}
+              </div>
+            </div>
+          </p>
           <p id="published-year">
             <br/>
             <div>{this.props.album.publishedYear}</div>
@@ -136,7 +167,27 @@ class Album extends React.Component {
               :
               <button type="button" id="spfy-btn" onClick={this.handleSaveClick.bind(this)}>SAVE</button>
             }
-            <button type="button" id="spfy-btn-round">...</button>
+
+            {/* <button className="dropdown" type="button" id="spfy-btn-round">
+              ...
+              <div className="dropdown-content-album-header">
+                <p className="all-elements-inside">
+                  <div className="element-menu">Add to Queue</div>
+                  <div className="element-menu">Go to Album Radio</div>
+                  <div className="element-menu">Go to Artist</div>
+                  <hr/>
+                  <div className="element-menu">Save to Your Library</div>
+                  <div className="element-menu">Add to Playlist</div>
+                  <hr/>
+                  <div className="element-menu">Share</div>
+                </p>
+              </div>
+            </button> */}
+
+            <Dropdown trigger={['click']} overlay={menu} animation="slide-up">
+              <button className="dropdown" type="button" id="spfy-btn-round">...</button>
+            </Dropdown>
+
           </p>
         </div>
         <br/>
@@ -157,5 +208,18 @@ class Album extends React.Component {
     )
   }
 }
+
+const menu = (
+  <Menu>
+    <MenuItem key="1">Add to Queue</MenuItem>
+    <MenuItem key="2">Go to Album Radio</MenuItem>
+    <MenuItem disabled>Go to Artist</MenuItem>
+    <Divider />
+    <MenuItem key="3">Save to Your Library</MenuItem>
+    <MenuItem key="4">Add to Playlist</MenuItem>
+    <Divider />
+    <MenuItem key="5">Share</MenuItem>
+  </Menu>
+);
 
 export default Album;

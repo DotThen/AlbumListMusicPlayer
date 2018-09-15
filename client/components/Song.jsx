@@ -154,14 +154,14 @@ class Song extends React.Component {
     }, () => this.props.handleLibraryClick(this.props.id, newStateInLibrary))
   }
 
-  coloredTitle() {  // This is not working, color needs to re-render but it is not...
+  coloredTitle() {
     var results = [];
-    if (this.state.idElement === <FontAwesomeIcon icon={faPauseCircle} size="lg"/>) {
-      results.push(<td id="song-name" onClick={this.handlePlayClick.bind(this)} style={{color: 'green'}}>{this.props.song.songName}</td>);
+    if (this.state.playing) {
+      results.push(<td id="song-name" onClick={this.handlePlayClick.bind(this)} style={{color: 'rgb(29,185,84)'}}>{this.props.song.songName}</td>);
       if (this.props.song.length%60 < 10) {
-        results.push(<td onClick={this.handlePlayClick.bind(this)} style={{color: 'green'}}>{Math.floor(this.props.song.length/60)}:0{this.props.song.length%60}</td>);
+        results.push(<td onClick={this.handlePlayClick.bind(this)} style={{color: 'rgb(29,185,84)'}}>{Math.floor(this.props.song.length/60)}:0{this.props.song.length%60}</td>);
       } else {
-        results.push(<td onClick={this.handlePlayClick.bind(this)} style={{color: 'green'}}>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>);
+        results.push(<td onClick={this.handlePlayClick.bind(this)} style={{color: 'rgb(29,185,84)'}}>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>);
       }
       return results;
     } else {

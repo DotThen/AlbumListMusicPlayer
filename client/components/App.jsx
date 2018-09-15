@@ -59,11 +59,14 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <h3>Albums</h3>
-        <hr/>
-        <div>
-          {this.buildAlbums()}
+        <div className="albums-module">
+          <h3>Albums</h3>
+          <hr/>
+          <div>
+            {this.buildAlbums()}
+          </div>
         </div>
+        <div className="player-module"></div>
       </div>
     )
   }
