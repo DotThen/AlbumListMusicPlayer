@@ -1,30 +1,33 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThermometerEmpty, faThermometerQuarter, faThermometerHalf, faThermometerThreeQuarters, 
-         faThermometerFull, faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons';
+         faThermometerFull, faPlayCircle, faPauseCircle, faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 class Song extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       idElement: this.props.id,
-      playing: false
+      playing: false,
+      inLibrary: this.props.addedToLibrary
     }
   }
 
-  componentWillReceiveProps() {
-    if ( (this.props.originalAlbum !== this.props.albumPlaying || this.props.currentAlbumPlaying === false) && this.props.albumPlaying !== 0) {
-    // if (this.props.currentAlbumPlaying === false && this.props.originalAlbum !== this.props.albumPlaying && this.props.albumPlaying !== 0) {
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      inLibrary: nextProps.addedToLibrary
+    });
+    if ( nextProps.originalAlbum !== nextProps.albumPlaying && nextProps.albumPlaying !== 0) {
       this.setState ({
         idElement: this.props.id,
         playing: false
       });
-    } else if (this.props.songPlaying !== this.props.id && this.props.songPlaying !== 0) {
+    } else if (nextProps.songPlaying !== this.props.id && nextProps.songPlaying !== 0) {
       this.setState ({
         idElement: this.props.id,
         playing: false
       });
-    } else if (this.props.songPlaying === this.props.id) {
+    } else if (nextProps.songPlaying === this.props.id) {
       this.setState ({
         idElement: <FontAwesomeIcon icon={faPauseCircle} size="lg"/>,
         playing: true
@@ -44,15 +47,60 @@ class Song extends React.Component {
 
   popularity() {
     if (this.props.song.popularity < 2) {
-      return <td><FontAwesomeIcon icon={faThermometerEmpty} size="lg"/></td>
+      return(
+        <td>
+          <div className="dropdown">
+            <FontAwesomeIcon icon={faThermometerEmpty} size="lg"/>
+            <div className="dropdown-content">
+              {this.props.song.streams.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} plays
+            </div>
+          </div>
+        </td>
+      )
     } else if (this.props.song.popularity < 4) {
-      return <td><FontAwesomeIcon icon={faThermometerQuarter} size="lg"/></td>
+      return(
+        <td>
+          <div className="dropdown">
+            <FontAwesomeIcon icon={faThermometerQuarter} size="lg"/>
+            <div className="dropdown-content">
+              {this.props.song.streams.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} plays
+            </div>
+          </div>
+        </td>
+      )
     } else if (this.props.song.popularity === 4) {
-      return <td><FontAwesomeIcon icon={faThermometerHalf} size="lg"/></td>
+      return(
+        <td>
+          <div className="dropdown">
+            <FontAwesomeIcon icon={faThermometerHalf} size="lg"/>
+            <div className="dropdown-content">
+              {this.props.song.streams.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} plays
+            </div>
+          </div>
+        </td>
+      )
     } else if (this.props.song.popularity < 7) {
-      return <td><FontAwesomeIcon icon={faThermometerThreeQuarters} size="lg"/></td>
+      return(
+        <td>
+          <div className="dropdown">
+            <FontAwesomeIcon icon={faThermometerThreeQuarters} size="lg"/>
+            <div className="dropdown-content">
+              {this.props.song.streams.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} plays
+            </div>
+          </div>
+        </td>
+      )
     } else {
-      return <td><FontAwesomeIcon icon={faThermometerFull} size="lg"/></td>
+      return(
+        <td>
+          <div className="dropdown">
+            <FontAwesomeIcon icon={faThermometerFull} size="lg"/>
+            <div className="dropdown-content">
+              {this.props.song.streams.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} plays
+            </div>
+          </div>
+        </td>
+      )
     }
   }
 
@@ -72,13 +120,14 @@ class Song extends React.Component {
     }
   }
 
-  handleClick() {
+  handlePlayClick() {
     if (!this.state.playing) {
       this.setState({
         idElement: <FontAwesomeIcon icon={faPauseCircle} size="lg"/>,
         playing: true
       }, () => {
-        this.props.updateID(this.props.id)
+        this.props.updateID(this.props.id);
+        this.forceUpdate();
       })
     } else {
       this.setState({
@@ -90,22 +139,37 @@ class Song extends React.Component {
     }
   }
 
-  coloredTitle() {  // This is not working, color needs to re-render but it is not....
+  inLibraryCheck() {
+    if (this.state.inLibrary) {
+      return <td id="plus" onClick={this.handleChangeInLibraryClick.bind(this)}><FontAwesomeIcon icon={faCheck} size="sm"/></td>;
+    } else {
+      return <td id="plus" onClick={this.handleChangeInLibraryClick.bind(this)}><FontAwesomeIcon icon={faPlus} size="sm"/></td>;
+    }
+  }
+
+  handleChangeInLibraryClick() {
+    var newStateInLibrary = !this.state.inLibrary;
+    this.setState({
+      inLibrary: newStateInLibrary
+    }, () => this.props.handleLibraryClick(this.props.id, newStateInLibrary))
+  }
+
+  coloredTitle() {
     var results = [];
-    if (this.state.idElement === <FontAwesomeIcon icon={faPauseCircle} size="lg"/>) {
-      results.push(<td id="song-name" style={{color: 'green'}}>{this.props.song.songName}</td>);
+    if (this.state.playing) {
+      results.push(<td id="song-name" onClick={this.handlePlayClick.bind(this)} style={{color: 'rgb(29,185,84)'}}>{this.props.song.songName}</td>);
       if (this.props.song.length%60 < 10) {
-        results.push(<td style={{color: 'green'}}>{Math.floor(this.props.song.length/60)}:0{this.props.song.length%60}</td>);
+        results.push(<td onClick={this.handlePlayClick.bind(this)} style={{color: 'rgb(29,185,84)'}}>{Math.floor(this.props.song.length/60)}:0{this.props.song.length%60}</td>);
       } else {
-        results.push(<td style={{color: 'green'}}>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>);
+        results.push(<td onClick={this.handlePlayClick.bind(this)} style={{color: 'rgb(29,185,84)'}}>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>);
       }
       return results;
     } else {
-      results.push(<td id="song-name">{this.props.song.songName}</td>);
+      results.push(<td id="song-name" onClick={this.handlePlayClick.bind(this)}>{this.props.song.songName}</td>);
       if (this.props.song.length%60 < 10) {
-        results.push(<td>{Math.floor(this.props.song.length/60)}:0{this.props.song.length%60}</td>);
+        results.push(<td onClick={this.handlePlayClick.bind(this)}>{Math.floor(this.props.song.length/60)}:0{this.props.song.length%60}</td>);
       } else {
-        results.push(<td>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>);
+        results.push(<td onClick={this.handlePlayClick.bind(this)}>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>);
       }
       return results;
     }
@@ -114,10 +178,9 @@ class Song extends React.Component {
   render() {
     return (
       <tr id="hover-elements" onMouseOver={this.handleMouseOver.bind(this)} 
-                              onMouseOut={this.handleMouseOut.bind(this)}
-                              onClick={this.handleClick.bind(this)}>
-        <td>{this.state.idElement}</td>
-        <td id="plus">+</td>
+                              onMouseOut={this.handleMouseOut.bind(this)}>
+        <td onMouseOver={this.handleMouseOver.bind(this)} onMouseOut={this.handleMouseOut.bind(this)}>{this.state.idElement}</td>
+        {this.inLibraryCheck()}
         {this.coloredTitle()}
         {this.popularity()}
       </tr>

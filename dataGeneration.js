@@ -1,5 +1,6 @@
 const faker = require('faker');
 const fs = require('fs');
+const coolImages = require('cool-images');
 
 var generateData = () => {
   var allArtists = [];
@@ -15,7 +16,7 @@ var generateData = () => {
       let album = {
         albumID: i * 10 + j,
         albumName: faker.random.words(),
-        albumImage: faker.random.image(),
+        albumImage: coolImages.one(400, 400),
         publishedYear: Math.floor(Math.random() * 69) + 1950,
         songs: []
       }
