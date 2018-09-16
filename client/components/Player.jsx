@@ -38,8 +38,8 @@ class Player extends React.Component{
               </p>
             </div>
           </Col>
-          <Col xs={6} ><div className="box">Second</div></Col>
-          <Col xs={3} ><div className="box">Third</div></Col>
+          <Col xs={6} ><div className="box"></div></Col>
+          <Col xs={3} ><div className="box"></div></Col>
         </Row>
       </div>
     )
