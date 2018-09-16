@@ -66,7 +66,6 @@ class App extends React.Component {
             {this.buildAlbums()}
           </div>
         </div>
-        <div className="player-module"></div>
       </div>
     )
   }

@@ -167,27 +167,20 @@ class Album extends React.Component {
               :
               <button type="button" id="spfy-btn" onClick={this.handleSaveClick.bind(this)}>SAVE</button>
             }
-
-            {/* <button className="dropdown" type="button" id="spfy-btn-round">
-              ...
-              <div className="dropdown-content-album-header">
-                <p className="all-elements-inside">
-                  <div className="element-menu">Add to Queue</div>
-                  <div className="element-menu">Go to Album Radio</div>
-                  <div className="element-menu">Go to Artist</div>
-                  <hr/>
-                  <div className="element-menu">Save to Your Library</div>
-                  <div className="element-menu">Add to Playlist</div>
-                  <hr/>
-                  <div className="element-menu">Share</div>
-                </p>
-              </div>
-            </button> */}
-
-            <Dropdown trigger={['click']} overlay={menu} animation="slide-up">
+            <Dropdown trigger={['click']} overlay={
+              <Menu>
+                <MenuItem key="1">Add to Queue</MenuItem>
+                <MenuItem key="2">Go to Album Radio</MenuItem>
+                <MenuItem disabled>Go to Artist</MenuItem>
+                <Divider />
+                <MenuItem key="3" onClick={this.handleSaveClick.bind(this)}>Save to Your Library</MenuItem>
+                <MenuItem key="4">Add to Playlist</MenuItem>
+                <Divider />
+                <MenuItem key="5">Share</MenuItem>
+              </Menu>
+            } animation="slide-up">
               <button className="dropdown" type="button" id="spfy-btn-round">...</button>
             </Dropdown>
-
           </p>
         </div>
         <br/>
@@ -208,18 +201,5 @@ class Album extends React.Component {
     )
   }
 }
-
-const menu = (
-  <Menu>
-    <MenuItem key="1">Add to Queue</MenuItem>
-    <MenuItem key="2">Go to Album Radio</MenuItem>
-    <MenuItem disabled>Go to Artist</MenuItem>
-    <Divider />
-    <MenuItem key="3">Save to Your Library</MenuItem>
-    <MenuItem key="4">Add to Playlist</MenuItem>
-    <Divider />
-    <MenuItem key="5">Share</MenuItem>
-  </Menu>
-);
 
 export default Album;
