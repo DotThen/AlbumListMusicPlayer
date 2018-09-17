@@ -15,7 +15,8 @@ class Album extends React.Component {
       unsaveAll: false,
       library: [],
       dropdownOpen: false,
-      saveButton: "SAVE"
+      saveButton: "SAVE",
+      playing: false
     }
     this.toggle = this.toggle.bind(this);
   }
@@ -44,6 +45,15 @@ class Album extends React.Component {
       }
       this.setState({
         library: songsInLibrary
+      })
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.albumPlaying === 0) {
+      this.setState({
+        songPlayingID: 0,
+        playing: false
       })
     }
   }

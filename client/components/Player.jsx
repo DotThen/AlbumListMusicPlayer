@@ -1,5 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-flexbox-grid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExpandArrowsAlt, faVolumeUp, faDesktop, faSlidersH } from '@fortawesome/free-solid-svg-icons';
 
 
 class Player extends React.Component{
@@ -38,8 +40,20 @@ class Player extends React.Component{
               </p>
             </div>
           </Col>
-          <Col xs={6} ><div className="box"></div></Col>
-          <Col xs={3} ><div className="box"></div></Col>
+          <Col xs={6} >
+            <div className="player-middle">
+              
+            </div>
+          </Col>
+          <Col xs={3} >
+            <div className="player-right">
+              <div id="player-right-button"><FontAwesomeIcon icon={faExpandArrowsAlt} size="sm"/></div>
+              <div id="player-right-button"><input className="volume-slider" type="range" min="1" max="100" /></div>
+              <div id="player-right-button"><FontAwesomeIcon icon={faVolumeUp} size="sm"/></div>
+              <div id="player-right-button"><FontAwesomeIcon icon={faDesktop} size="sm"/></div>
+              <div id="player-right-button"><FontAwesomeIcon icon={faSlidersH} size="sm"/></div>
+            </div>
+          </Col>
         </Row>
       </div>
     )
