@@ -55,6 +55,11 @@ class Album extends React.Component {
         songPlayingID: 0,
         playing: false
       })
+    } else if (newProps.albumPlaying === this.props.id) {
+      this.setState({
+        songPlayingID: newProps.songPlayingID,
+        playing: true
+      })
     }
   }
 

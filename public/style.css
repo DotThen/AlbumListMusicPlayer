@@ -298,8 +298,6 @@ table tr td {
   color: rgb(255, 255, 255);
 }
 
-
-
 .volume-slider {
   width: 80px;
   background: #d3d3d3;
@@ -312,4 +310,34 @@ table tr td {
   opacity: 1;
 }
 
+.player-middle {
+  padding-top: 15px;
+  padding-right: 20px;
+  text-align: center;
+}
+
+.player-middle > #player-middle-button {
+  color: rgba(179,179,179);
+  margin-left: 20px;
+  margin-right: 20px;
+  display: inline-block;
+}
+
+.player-middle > #player-middle-button-play {
+  color: rgba(179,179,179);
+  margin-left: 20px;
+  margin-right: 20px;
+  display: inline-block;
+}
+
+#player-middle-button:hover {
+  color: rgb(255, 255, 255);
+}
+
+#player-middle-button-play:hover {
+  color: rgb(255, 255, 255);
+  transform:scale(1.1,1.1);
+  -webkit-transform:scale(1.1,1.1);
+  -moz-transform:scale(1.1,1.1);
+}
 

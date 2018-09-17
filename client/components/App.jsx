@@ -50,7 +50,8 @@ class App extends React.Component {
     for (var i = 0; i < this.state.albums.length; i++) {
       albums.push(
         <div>
-          <Album album={this.state.albums[i]} id={i+1} update={this.updateAlbumSongPlaying.bind(this)} albumPlaying={this.state.albumPlayingID}/>
+          <Album album={this.state.albums[i]} id={i+1} update={this.updateAlbumSongPlaying.bind(this)} 
+                albumPlaying={this.state.albumPlayingID} songPlayingID={this.state.songPlayingID}/>
         </div>
       )
     }
@@ -70,7 +71,8 @@ class App extends React.Component {
         <div className="player-module"><Player artist={this.state.artistName} 
                                                albums={this.state.albums} 
                                                albumPlaying={this.state.albumPlayingID}
-                                               songPlaying={this.state.songPlayingID}/></div>
+                                               songPlaying={this.state.songPlayingID}
+                                               updateAlbumSongPlaying={this.updateAlbumSongPlaying.bind(this)}/></div>
       </div>
     )
   }

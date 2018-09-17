@@ -1,7 +1,8 @@
 import React from 'react';
 import { Row, Col } from 'react-flexbox-grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExpandArrowsAlt, faVolumeUp, faDesktop, faSlidersH } from '@fortawesome/free-solid-svg-icons';
+import { faExpandArrowsAlt, faVolumeUp, faDesktop, faSlidersH, faPauseCircle,
+         faRandom, faStepBackward, faPlayCircle, faStepForward, faRedo } from '@fortawesome/free-solid-svg-icons';
 
 
 class Player extends React.Component{
@@ -9,7 +10,8 @@ class Player extends React.Component{
     super(props);
     this.state = {
       album: 0,
-      song: 0
+      song: 0,
+      playing: false
     }
   }
 
@@ -17,7 +19,31 @@ class Player extends React.Component{
     if (newProps.albumPlaying !== 0) {
       this.setState({
         album: newProps.albumPlaying - 1,
-        song: newProps.songPlaying - 1
+        song: newProps.songPlaying - 1,
+        playing: true
+      })
+    } else {
+      this.setState({
+        playing: false
+      })
+    }
+  }
+
+  handlePlayClick() {
+    console.log("Hey Out")
+    if (!this.state.playing) {
+      console.log("Hey In 1")
+      var alb = this.state.album+1;
+      var sng = this.state.song+1;
+      this.props.updateAlbumSongPlaying(alb, sng);
+      this.setState({
+        playing: true
+      })
+    } else {
+      console.log("Hey In 2")
+      this.props.updateAlbumSongPlaying(0, 0);
+      this.setState({
+        playing: false
       })
     }
   }
@@ -42,7 +68,21 @@ class Player extends React.Component{
           </Col>
           <Col xs={6} >
             <div className="player-middle">
-              
+              <div id="player-middle-button"><FontAwesomeIcon icon={faRandom} size="sm"/></div>
+              <div id="player-middle-button"><FontAwesomeIcon icon={faStepBackward} size="sm"/></div>
+
+              { (this.state.playing && this.props.albumPlaying !== 0) ?
+                <div id="player-middle-button-play" onClick={this.handlePlayClick.bind(this)}>
+                  <FontAwesomeIcon icon={faPauseCircle} size="lg"/>
+                </div>
+                :
+                <div id="player-middle-button-play" onClick={this.handlePlayClick.bind(this)}>
+                  <FontAwesomeIcon icon={faPlayCircle} size="lg"/>
+                </div>
+              }
+
+              <div id="player-middle-button"><FontAwesomeIcon icon={faStepForward} size="sm"/></div>
+              <div id="player-middle-button"><FontAwesomeIcon icon={faRedo} size="sm"/></div>
             </div>
           </Col>
           <Col xs={3} >
