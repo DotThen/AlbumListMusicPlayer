@@ -15,7 +15,8 @@ class Album extends React.Component {
       unsaveAll: false,
       library: [],
       dropdownOpen: false,
-      saveButton: "SAVE"
+      saveButton: "SAVE",
+      playing: false
     }
     this.toggle = this.toggle.bind(this);
   }
@@ -37,13 +38,27 @@ class Album extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.state.library.length === 0 && this.props.album.songs.length !== 0) {
+    if (this.state.library.length === 1 && this.props.album.songs.length > 1) {
       var songsInLibrary = [];
       for (var i = 0; i < this.props.album.songs.length; i++) {
         songsInLibrary.push(this.props.album.songs[i].addedToLibrary);
       }
       this.setState({
         library: songsInLibrary
+      })
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.albumPlaying === 0) {
+      this.setState({
+        songPlayingID: 0,
+        playing: false
+      })
+    } else if (newProps.albumPlaying === this.props.id) {
+      this.setState({
+        songPlayingID: newProps.songPlayingID,
+        playing: true
       })
     }
   }
