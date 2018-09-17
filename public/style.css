@@ -306,9 +306,7 @@ table tr td {
   transition: opacity .2s;
 }
 
-.volume-slider:focus {
-  opacity: 1;
-}
+.volume-slider:focus,
 .volume-slider:hover {
   opacity: 1;
 }
@@ -348,10 +346,30 @@ table tr td {
   width: 650px;
   background: #d3d3d3;
   margin-top: 20px;
-  margin-left: 80px;
-  float: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  display: inline-block;
   opacity: 0.7;
   -webkit-transition: .2s;
   transition: opacity .2s;
+}
+
+.song-slider:focus,
+.song-slider:hover {
+  opacity: 1;
+}
+
+.player-middle-bottom {
+  font-size: 10pt;
+  text-align: center;
+}
+
+.player-middle-bottom > #player-middle-bottom-elements {
+  display: inline-block;
+}
+
+.player-middle-bottom > #player-middle-bottom-text {
+  display: inline-block;
+  color: rgb(131, 131, 131);
 }
 
