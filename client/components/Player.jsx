@@ -91,11 +91,27 @@ class Player extends React.Component{
   }
 
   handleNextClick() {
-    this.props.updateAlbumSongPlaying(this.state.album+1, this.state.song+2);
+    if (this.props.albums[this.state.album].songs.length <= this.state.song + 1) {
+      if (this.props.albums.length === this.state.album + 1) {
+        this.props.updateAlbumSongPlaying(1, 1);
+      } else {
+        this.props.updateAlbumSongPlaying(this.state.album+2, 1);
+      }
+    } else {
+      this.props.updateAlbumSongPlaying(this.state.album+1, this.state.song+2);
+    }
   }
 
   handlePreviousClick() {
-    this.props.updateAlbumSongPlaying(this.state.album+1, this.state.song);
+    if (this.state.song - 1 < 0) {
+      if (this.state.album === 0) {
+        this.props.updateAlbumSongPlaying(this.props.albums.length, this.props.albums[this.props.albums.length-1].songs.length);
+      } else {
+        this.props.updateAlbumSongPlaying(this.state.album, this.props.albums[this.state.album-1].songs.length);
+      }
+    } else {
+      this.props.updateAlbumSongPlaying(this.state.album+1, this.state.song);
+    }
   }
 
   handleRandomSongClick() {
