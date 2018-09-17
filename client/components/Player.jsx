@@ -11,40 +11,65 @@ class Player extends React.Component{
     this.state = {
       album: 0,
       song: 0,
-      playing: false
+      playing: false,
+      playValue: 0
     }
   }
 
   componentWillReceiveProps(newProps) {
+    this.clearAllIntervals();
     if (newProps.albumPlaying !== 0) {
       this.setState({
         album: newProps.albumPlaying - 1,
         song: newProps.songPlaying - 1,
-        playing: true
+        playing: true,
+        playValue: 0
+      }, () => {
+        this.timer = setInterval(() => {
+          this.setState({
+            playValue: this.state.playValue + 1
+          })
+        }, 1000)
       })
     } else {
       this.setState({
         playing: false
-      })
+      }, () => this.clearAllIntervals())
     }
   }
 
   handlePlayClick() {
-    console.log("Hey Out")
     if (!this.state.playing) {
-      console.log("Hey In 1")
-      var alb = this.state.album+1;
-      var sng = this.state.song+1;
-      this.props.updateAlbumSongPlaying(alb, sng);
+      this.props.updateAlbumSongPlaying(this.state.album+1, this.state.song+1);
       this.setState({
-        playing: true
+        playing: true,
+        playValue: 0
+      }, () => {
+        this.timer = setInterval(() => {
+          this.setState({
+            playValue: this.state.playValue + 1
+          })
+        }, 1000)
       })
     } else {
-      console.log("Hey In 2")
       this.props.updateAlbumSongPlaying(0, 0);
       this.setState({
         playing: false
-      })
+      }, () => this.clearAllIntervals())
+    }
+  }
+
+  handleNextClick() {
+    this.props.updateAlbumSongPlaying(this.state.album+1, this.state.song+2);
+  }
+
+  handlePreviousClick() {
+    this.props.updateAlbumSongPlaying(this.state.album+1, this.state.song);
+  }
+
+  clearAllIntervals() {
+    for (var i = 0; i < 1000; i++) {
+      window.clearInterval(i);
     }
   }
 
@@ -69,7 +94,7 @@ class Player extends React.Component{
           <Col xs={6} >
             <div className="player-middle">
               <div id="player-middle-button"><FontAwesomeIcon icon={faRandom} size="sm"/></div>
-              <div id="player-middle-button"><FontAwesomeIcon icon={faStepBackward} size="sm"/></div>
+              <div id="player-middle-button" onClick={this.handlePreviousClick.bind(this)}><FontAwesomeIcon icon={faStepBackward} size="sm"/></div>
 
               { (this.state.playing && this.props.albumPlaying !== 0) ?
                 <div id="player-middle-button-play" onClick={this.handlePlayClick.bind(this)}>
@@ -81,9 +106,10 @@ class Player extends React.Component{
                 </div>
               }
 
-              <div id="player-middle-button"><FontAwesomeIcon icon={faStepForward} size="sm"/></div>
+              <div id="player-middle-button" onClick={this.handleNextClick.bind(this)}><FontAwesomeIcon icon={faStepForward} size="sm"/></div>
               <div id="player-middle-button"><FontAwesomeIcon icon={faRedo} size="sm"/></div>
             </div>
+            <div id="player-middle-button"><input className="song-slider" type="range" min="1" max="100" value={this.state.playValue}/></div>
           </Col>
           <Col xs={3} >
             <div className="player-right">

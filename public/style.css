@@ -306,6 +306,9 @@ table tr td {
   transition: opacity .2s;
 }
 
+.volume-slider:focus {
+  opacity: 1;
+}
 .volume-slider:hover {
   opacity: 1;
 }
@@ -336,8 +339,19 @@ table tr td {
 
 #player-middle-button-play:hover {
   color: rgb(255, 255, 255);
-  transform:scale(1.1,1.1);
-  -webkit-transform:scale(1.1,1.1);
-  -moz-transform:scale(1.1,1.1);
+  transform:scale(1.2,1.2);
+  -webkit-transform:scale(1.2,1.2);
+  -moz-transform:scale(1.2,1.2);
+}
+
+.song-slider {
+  width: 650px;
+  background: #d3d3d3;
+  margin-top: 20px;
+  margin-left: 80px;
+  float: center;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
 }
 
