@@ -3,6 +3,7 @@ import { Row, Col } from 'react-flexbox-grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExpandArrowsAlt, faVolumeUp, faDesktop, faSlidersH, faPauseCircle,
          faRandom, faStepBackward, faPlayCircle, faStepForward, faRedo} from '@fortawesome/free-solid-svg-icons';
+import ply from '../css_components/Player.css';
 
 
 class Player extends React.Component{
@@ -150,55 +151,55 @@ class Player extends React.Component{
         <Row>
 
           <Col xs={3} >
-            <div className="player-left">
+            <div className={ply.playerleft}>
               <p style={{float: "left", margin: "15"}}>
                 <div>
-                  <img src={this.props.albums[this.state.album].albumImage} width="20px" height="20px"  border="1px" className="player-image"/>
+                  <img src={this.props.albums[this.state.album].albumImage} width="20px" height="20px"  border="1px" className={ply.playerimage}/>
                 </div>
               </p>
               <p style={{margin: "0"}}>
                 <br/>
-                <div><span id="player-song-name">{this.props.albums[this.state.album].songs[this.state.song].songName}</span></div>
-                <div><span id="player-artist-name">{this.props.artist}</span></div>
+                <div><span id={ply.playersongname}>{this.props.albums[this.state.album].songs[this.state.song].songName}</span></div>
+                <div><span id={ply.playerartistname}>{this.props.artist}</span></div>
               </p>
             </div>
           </Col>
 
           <Col xs={6} >
-            <div className="player-middle">
-              <div id="player-middle-button" onClick={this.handleRandomSongClick.bind(this)}><FontAwesomeIcon icon={faRandom} size="sm"/></div>
-              <div id="player-middle-button" onClick={this.handlePreviousClick.bind(this)}><FontAwesomeIcon icon={faStepBackward} size="sm"/></div>
+            <div className={ply.playermiddle}>
+              <div id={ply.playermiddlebutton} onClick={this.handleRandomSongClick.bind(this)}><FontAwesomeIcon icon={faRandom} size="sm"/></div>
+              <div id={ply.playermiddlebutton} onClick={this.handlePreviousClick.bind(this)}><FontAwesomeIcon icon={faStepBackward} size="sm"/></div>
               { (this.state.playing && this.props.albumPlaying !== 0) ?
-                <div id="player-middle-button-play" onClick={this.handlePlayClick.bind(this)}>
+                <div id={ply.playermiddlebuttonplay} onClick={this.handlePlayClick.bind(this)}>
                   <FontAwesomeIcon icon={faPauseCircle} size="lg"/>
                 </div>
                 :
-                <div id="player-middle-button-play" onClick={this.handlePlayClick.bind(this)}>
+                <div id={ply.playermiddlebuttonplay} onClick={this.handlePlayClick.bind(this)}>
                   <FontAwesomeIcon icon={faPlayCircle} size="lg"/>
                 </div>
               }
-              <div id="player-middle-button" onClick={this.handleNextClick.bind(this)}><FontAwesomeIcon icon={faStepForward} size="sm"/></div>
-              <div id="player-middle-button" onClick={this.handleRepeatSongClick.bind(this)}><FontAwesomeIcon icon={faRedo} size="sm"/></div>
+              <div id={ply.playermiddlebutton} onClick={this.handleNextClick.bind(this)}><FontAwesomeIcon icon={faStepForward} size="sm"/></div>
+              <div id={ply.playermiddlebutton} onClick={this.handleRepeatSongClick.bind(this)}><FontAwesomeIcon icon={faRedo} size="sm"/></div>
             </div>
-            <div className="player-middle-bottom">
-              <div id="player-middle-bottom-text">{this.state.timeValue}</div>
-              <div id="player-middle-bottom-elements"><input className="song-slider" type="range" min="0" max={this.props.albums[this.state.album].songs[this.state.song].length} value={this.state.playValue}/></div>
+            <div className={ply.playermiddlebottom}>
+              <div id={ply.playermiddlebottomtext}>{this.state.timeValue}</div>
+              <div id={ply.playermiddlebottomelements}><input className={ply.songslider} type="range" min="0" max={this.props.albums[this.state.album].songs[this.state.song].length} value={this.state.playValue}/></div>
               {this.props.albums[this.state.album].songs[this.state.song].length%60 < 10 ? 
-                <div id="player-middle-bottom-text">{Math.floor(this.props.albums[this.state.album].songs[this.state.song].length/60)}:0{this.props.albums[this.state.album].songs[this.state.song].length%60}</div>
+                <div id={ply.playermiddlebottomtext}>{Math.floor(this.props.albums[this.state.album].songs[this.state.song].length/60)}:0{this.props.albums[this.state.album].songs[this.state.song].length%60}</div>
                 :
-                <div id="player-middle-bottom-text">{Math.floor(this.props.albums[this.state.album].songs[this.state.song].length/60)}:{this.props.albums[this.state.album].songs[this.state.song].length%60}</div>
+                <div id={ply.playermiddlebottomtext}>{Math.floor(this.props.albums[this.state.album].songs[this.state.song].length/60)}:{this.props.albums[this.state.album].songs[this.state.song].length%60}</div>
               }
               
             </div>
           </Col>
 
           <Col xs={3} >
-            <div className="player-right">
-              <div id="player-right-button"><FontAwesomeIcon icon={faExpandArrowsAlt} size="sm"/></div>
-              <div id="player-right-button"><input className="volume-slider" type="range" min="1" max="100" /></div>
-              <div id="player-right-button"><FontAwesomeIcon icon={faVolumeUp} size="sm"/></div>
-              <div id="player-right-button"><FontAwesomeIcon icon={faDesktop} size="sm"/></div>
-              <div id="player-right-button"><FontAwesomeIcon icon={faSlidersH} size="sm"/></div>
+            <div className={ply.playerright}>
+              <div id={ply.playerrightbutton}><FontAwesomeIcon icon={faExpandArrowsAlt} size="sm"/></div>
+              <div id={ply.playerrightbutton}><input className={ply.volumeslider} type="range" min="1" max="100" /></div>
+              <div id={ply.playerrightbutton}><FontAwesomeIcon icon={faVolumeUp} size="sm"/></div>
+              <div id={ply.playerrightbutton}><FontAwesomeIcon icon={faDesktop} size="sm"/></div>
+              <div id={ply.playerrightbutton}><FontAwesomeIcon icon={faSlidersH} size="sm"/></div>
             </div>
           </Col>
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThermometerEmpty, faThermometerQuarter, faThermometerHalf, faThermometerThreeQuarters, 
          faThermometerFull, faPlayCircle, faPauseCircle, faPlus, faCheck } from '@fortawesome/free-solid-svg-icons';
+import sngCss from '../css_components/Song.css';
 
 class Song extends React.Component {
   constructor(props) {
@@ -48,10 +49,10 @@ class Song extends React.Component {
   popularity() {
     if (this.props.song.popularity < 2) {
       return(
-        <td>
-          <div className="dropdown">
+        <td className={sngCss.mainTableDest}>
+          <div className={sngCss.dropdown}>
             <FontAwesomeIcon icon={faThermometerEmpty} size="lg"/>
-            <div className="dropdown-content">
+            <div className={sngCss.dropdowncontent}>
               {this.props.song.streams.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} plays
             </div>
           </div>
@@ -59,10 +60,10 @@ class Song extends React.Component {
       )
     } else if (this.props.song.popularity < 4) {
       return(
-        <td>
-          <div className="dropdown">
+        <td className={sngCss.mainTableDest}>
+          <div className={sngCss.dropdown}>
             <FontAwesomeIcon icon={faThermometerQuarter} size="lg"/>
-            <div className="dropdown-content">
+            <div className={sngCss.dropdowncontent}>
               {this.props.song.streams.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} plays
             </div>
           </div>
@@ -70,10 +71,10 @@ class Song extends React.Component {
       )
     } else if (this.props.song.popularity === 4) {
       return(
-        <td>
-          <div className="dropdown">
+        <td className={sngCss.mainTableDest}>
+          <div className={sngCss.dropdown}>
             <FontAwesomeIcon icon={faThermometerHalf} size="lg"/>
-            <div className="dropdown-content">
+            <div className={sngCss.dropdowncontent}>
               {this.props.song.streams.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} plays
             </div>
           </div>
@@ -81,10 +82,10 @@ class Song extends React.Component {
       )
     } else if (this.props.song.popularity < 7) {
       return(
-        <td>
-          <div className="dropdown">
+        <td className={sngCss.mainTableDest}>
+          <div className={sngCss.dropdown}>
             <FontAwesomeIcon icon={faThermometerThreeQuarters} size="lg"/>
-            <div className="dropdown-content">
+            <div className={sngCss.dropdowncontent}>
               {this.props.song.streams.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} plays
             </div>
           </div>
@@ -92,10 +93,10 @@ class Song extends React.Component {
       )
     } else {
       return(
-        <td>
-          <div className="dropdown">
+        <td className={sngCss.mainTableDest}>
+          <div className={sngCss.dropdown}>
             <FontAwesomeIcon icon={faThermometerFull} size="lg"/>
-            <div className="dropdown-content">
+            <div className={sngCss.dropdowncontent}>
               {this.props.song.streams.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} plays
             </div>
           </div>
@@ -141,9 +142,9 @@ class Song extends React.Component {
 
   inLibraryCheck() {
     if (this.state.inLibrary) {
-      return <td id="plus" onClick={this.handleChangeInLibraryClick.bind(this)}><FontAwesomeIcon icon={faCheck} size="sm"/></td>;
+      return <td className={sngCss.mainTableDest} id={sngCss.plus} onClick={this.handleChangeInLibraryClick.bind(this)}><FontAwesomeIcon icon={faCheck} size="sm"/></td>;
     } else {
-      return <td id="plus" onClick={this.handleChangeInLibraryClick.bind(this)}><FontAwesomeIcon icon={faPlus} size="sm"/></td>;
+      return <td className={sngCss.mainTableDest} id={sngCss.plus} onClick={this.handleChangeInLibraryClick.bind(this)}><FontAwesomeIcon icon={faPlus} size="sm"/></td>;
     }
   }
 
@@ -157,19 +158,19 @@ class Song extends React.Component {
   coloredTitle() {
     var results = [];
     if (this.state.playing) {
-      results.push(<td id="song-name" onClick={this.handlePlayClick.bind(this)} style={{color: 'rgb(29,185,84)'}}>{this.props.song.songName}</td>);
+      results.push(<td className={sngCss.mainTableDest} id={sngCss.songname} onClick={this.handlePlayClick.bind(this)} style={{color: 'rgb(29,185,84)'}}>{this.props.song.songName}</td>);
       if (this.props.song.length%60 < 10) {
-        results.push(<td onClick={this.handlePlayClick.bind(this)} style={{color: 'rgb(29,185,84)'}}>{Math.floor(this.props.song.length/60)}:0{this.props.song.length%60}</td>);
+        results.push(<td className={sngCss.mainTableDest} onClick={this.handlePlayClick.bind(this)} style={{color: 'rgb(29,185,84)'}}>{Math.floor(this.props.song.length/60)}:0{this.props.song.length%60}</td>);
       } else {
-        results.push(<td onClick={this.handlePlayClick.bind(this)} style={{color: 'rgb(29,185,84)'}}>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>);
+        results.push(<td className={sngCss.mainTableDest} onClick={this.handlePlayClick.bind(this)} style={{color: 'rgb(29,185,84)'}}>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>);
       }
       return results;
     } else {
-      results.push(<td id="song-name" onClick={this.handlePlayClick.bind(this)}>{this.props.song.songName}</td>);
+      results.push(<td className={sngCss.mainTableDest} id={sngCss.songname} onClick={this.handlePlayClick.bind(this)}>{this.props.song.songName}</td>);
       if (this.props.song.length%60 < 10) {
-        results.push(<td onClick={this.handlePlayClick.bind(this)}>{Math.floor(this.props.song.length/60)}:0{this.props.song.length%60}</td>);
+        results.push(<td className={sngCss.mainTableDest} onClick={this.handlePlayClick.bind(this)}>{Math.floor(this.props.song.length/60)}:0{this.props.song.length%60}</td>);
       } else {
-        results.push(<td onClick={this.handlePlayClick.bind(this)}>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>);
+        results.push(<td className={sngCss.mainTableDest} onClick={this.handlePlayClick.bind(this)}>{Math.floor(this.props.song.length/60)}:{this.props.song.length%60}</td>);
       }
       return results;
     }
@@ -177,9 +178,9 @@ class Song extends React.Component {
 
   render() {
     return (
-      <tr id="hover-elements" onMouseOver={this.handleMouseOver.bind(this)} 
+      <tr className={sngCss.mainTableRow} id={sngCss.hoverelements} onMouseOver={this.handleMouseOver.bind(this)} 
                               onMouseOut={this.handleMouseOut.bind(this)}>
-        <td onMouseOver={this.handleMouseOver.bind(this)} onMouseOut={this.handleMouseOut.bind(this)}>{this.state.idElement}</td>
+        <td className={sngCss.mainTableDest} onMouseOver={this.handleMouseOver.bind(this)} onMouseOut={this.handleMouseOut.bind(this)}>{this.state.idElement}</td>
         {this.inLibraryCheck()}
         {this.coloredTitle()}
         {this.popularity()}

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock, faThumbsUp, faPlayCircle, faPauseCircle } from '@fortawesome/free-solid-svg-icons';
 import Dropdown from 'rc-dropdown';
 import Menu, { Item as MenuItem, Divider } from 'rc-menu';
+import albCss from '../css_components/Album.css';
 
 class Album extends React.Component {
   constructor(props) {
@@ -141,9 +142,9 @@ class Album extends React.Component {
 
   playbuttonAlbumCover() {
     if (this.state.playing) {
-      return <div className="middle-album-image-text" onClick={this.handleAlbumImagePlayClick.bind(this)}><FontAwesomeIcon icon={faPauseCircle} size="5x"/></div>
+      return <div className={albCss.middlealbumimagetext} onClick={this.handleAlbumImagePlayClick.bind(this)}><FontAwesomeIcon icon={faPauseCircle} size="5x"/></div>
     } else {
-      return <div className="middle-album-image-text" onClick={this.handleAlbumImagePlayClick.bind(this)}><FontAwesomeIcon icon={faPlayCircle} size="5x"/></div>
+      return <div className={albCss.middlealbumimagetext} onClick={this.handleAlbumImagePlayClick.bind(this)}><FontAwesomeIcon icon={faPlayCircle} size="5x"/></div>
     }
   }
 
@@ -164,23 +165,23 @@ class Album extends React.Component {
   render() {
     return (
       <div>
-        <div className="album-header">
+        <div className={albCss.albumheader}>
           <p style={{float: "left"}}>
-            <div className="container-album-image-play">
-              <img src={this.props.album.albumImage} width="140" height="140"  border="1px" className="album-image"/>
-              <div className="middle-album-image">
+            <div className={albCss.containeralbumimageplay}>
+              <img src={this.props.album.albumImage} width="140" height="140"  border="1px" className={albCss.albumimage}/>
+              <div className={albCss.middlealbumimage}>
                 {this.playbuttonAlbumCover()}
               </div>
             </div>
           </p>
-          <p id="published-year">
+          <p id={albCss.publishedyear}>
             <br/>
             <div>{this.props.album.publishedYear}</div>
-            <div id="album-title">{this.props.album.albumName}</div>
+            <div id={albCss.albumtitle}>{this.props.album.albumName}</div>
             {this.state.saveButton === "SAVED" ?
-              <button type="button" id="spfy-btn" onClick={this.handleSaveClick.bind(this)} style={{color: 'rgb(29,185,84)'}}>SAVED</button>
+              <button type="button" id={albCss.spfybtn} onClick={this.handleSaveClick.bind(this)} style={{color: 'rgb(29,185,84)'}}>SAVED</button>
               :
-              <button type="button" id="spfy-btn" onClick={this.handleSaveClick.bind(this)}>SAVE</button>
+              <button type="button" id={albCss.spfybtn} onClick={this.handleSaveClick.bind(this)}>SAVE</button>
             }
             <Dropdown trigger={['click']} overlay={
               <Menu>
@@ -194,19 +195,19 @@ class Album extends React.Component {
                 <MenuItem key="5">Share</MenuItem>
               </Menu>
             } animation="slide-up">
-              <button className="dropdown" type="button" id="spfy-btn-round">...</button>
+              <button className={albCss.dropdown} type="button" id={albCss.spfybtnround}>...</button>
             </Dropdown>
           </p>
         </div>
         <br/>
-        <table>
+        <table className={albCss.mainTable}>
           <tbody>
-            <tr>
-              <th width="30">#</th>
-              <th width="50"></th>
-              <th id="song-name-title">TITLE</th>
-              <th width="30"><FontAwesomeIcon icon={faClock} size="lg"/></th>
-              <th width="50"><FontAwesomeIcon icon={faThumbsUp} size="lg"/></th>
+            <tr className={albCss.mainTableRow}>
+              <th className={albCss.mainTableHeader} width="30">#</th>
+              <th className={albCss.mainTableHeader} width="50"></th>
+              <th className={albCss.mainTableHeader} id={albCss.songnametitle}>TITLE</th>
+              <th className={albCss.mainTableHeader} width="30"><FontAwesomeIcon icon={faClock} size="lg"/></th>
+              <th className={albCss.mainTableHeader} width="50"><FontAwesomeIcon icon={faThumbsUp} size="lg"/></th>
             </tr>
             {this.buildSongs()}
           </tbody>

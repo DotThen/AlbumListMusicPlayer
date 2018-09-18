@@ -2,6 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import Album from './Album.jsx';
 import Player from './Player.jsx'; 
+import appCss from '../css_components/App.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -61,14 +62,14 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <div className="albums-module">
+        <div className={appCss.albumsModule}>
           <h3>Albums</h3>
           <hr/>
           <div>
             {this.buildAlbums()}
           </div>
         </div>
-        <div className="player-module"><Player artist={this.state.artistName} 
+        <div className={appCss.playerModule}><Player artist={this.state.artistName} 
                                                albums={this.state.albums} 
                                                albumPlaying={this.state.albumPlayingID}
                                                songPlaying={this.state.songPlayingID}
