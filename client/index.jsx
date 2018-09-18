@@ -4,4 +4,4 @@ import AlbumApp from './components/App.jsx';
 
 ReactDOM.render(<AlbumApp />, document.getElementById('albumApp'));
 
-window.Albumpp = AlbumApp;
+window.AlbumApp = AlbumApp;
