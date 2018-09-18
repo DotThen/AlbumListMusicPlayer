@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App.jsx';
+import AlbumApp from './components/App.jsx';
 
-ReactDOM.render(<App />, document.getElementById('albumApp'));
+ReactDOM.render(<AlbumApp />, document.getElementById('albumApp'));
 
-window.App = App;
+window.Albumpp = AlbumApp;
