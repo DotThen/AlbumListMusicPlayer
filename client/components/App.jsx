@@ -27,7 +27,7 @@ class App extends React.Component {
   getAllArtists(artistId) {
     $.ajax({
       method: "GET",
-      url: "/artists/" + artistId,
+      url: "/artists/albums/" + artistId,
       success: (data) => {
         this.setState({
           artist: data[0],

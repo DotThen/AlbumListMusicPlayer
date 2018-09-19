@@ -9,7 +9,7 @@ server.use(bodyParser.json());
 server.use(express.urlencoded({extended: true}));
 server.use(express.static(path.join(__dirname, '../public')));
 
-server.get('/artists/:artistID', (req, res) => {
+server.get('/artists/albums/:artistID', (req, res) => {
   getArtist(req.params.artistID, (data) => {
     res.send(data);
   })
