@@ -63,8 +63,8 @@ class App extends React.Component {
     return(
       <div>
         <div className={appCss.albumsModule}>
-          <h3>Albums</h3>
-          <hr/>
+          <h3 id={appCss.AppAlbumTitle}>Albums</h3>
+          <hr id={appCss.horizLine}/>
           <div>
             {this.buildAlbums()}
           </div>

@@ -6,7 +6,7 @@
   margin-bottom: 100px;
   margin-left: 250px;
   margin-right: 200px;
-  margin-top: 300px;
+  margin-top: 100px;
 }
 
 .playerModule {
@@ -18,11 +18,16 @@
   z-index: 10;
 }
 
-hr {
+#horizLine {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid rgba(73, 73, 73, 0.288);
+  border-top: 1px solid rgba(92, 91, 91, 0.404);
   margin: 1em 0;
   padding: 0; 
+}
+
+#AppAlbumTitle {
+  font-weight: 700;
+  font-size: 14pt;
 }
