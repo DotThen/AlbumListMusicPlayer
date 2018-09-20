@@ -166,7 +166,7 @@ class Album extends React.Component {
     return (
       <div>
         <div className={albCss.albumheader}>
-          <p style={{float: "left"}}>
+          <p style={{float: "left", marginTop: "16px"}}>
             <div className={albCss.containeralbumimageplay}>
               <img src={this.props.album.albumImage} width="140" height="140"  border="1px" className={albCss.albumimage}/>
               <div className={albCss.middlealbumimage}>

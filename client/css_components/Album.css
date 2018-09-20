@@ -77,6 +77,10 @@
   border: 0.5px solid #b3b3b3;
 }
 
+#spfybtn:focus {
+  outline: 0;
+}
+
 #spfybtn:hover {
   transform:scale(1.1,1.1);
   -webkit-transform:scale(1.1,1.1);
@@ -106,6 +110,7 @@
   -webkit-transform:scale(1.1,1.1);
   -moz-transform:scale(1.1,1.1);
   border: 1.4px solid white;
+  outline: 0;
 }
 
 #spfybtnround:hover {
