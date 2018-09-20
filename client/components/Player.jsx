@@ -185,7 +185,7 @@ class Player extends React.Component{
               <div id={ply.playermiddlebottomtextleft}>{this.state.timeValue}</div>
               <div id={ply.playermiddlebottomelements}><input className={ply.songslider} type="range" min="0" max={this.props.albums[this.state.album].songs[this.state.song].length} value={this.state.playValue}/></div>
               {this.props.albums[this.state.album].songs[this.state.song].length%60 < 10 ? 
-                <div id={ply.playermiddlebottomtext}>{Math.floor(this.props.albums[this.state.album].songs[this.state.song].length/60)}:0{this.props.albums[this.state.album].songs[this.state.song].length%60}</div>
+                <div id={ply.playermiddlebottomtextright}>{Math.floor(this.props.albums[this.state.album].songs[this.state.song].length/60)}:0{this.props.albums[this.state.album].songs[this.state.song].length%60}</div>
                 :
                 <div id={ply.playermiddlebottomtextright}>{Math.floor(this.props.albums[this.state.album].songs[this.state.song].length/60)}:{this.props.albums[this.state.album].songs[this.state.song].length%60}</div>
               }
