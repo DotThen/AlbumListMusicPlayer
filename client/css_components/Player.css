@@ -118,7 +118,7 @@
 }
 
 .songslider {
-  width: 650px;
+  width: 90%;
   background: #d3d3d3;
   margin-top: 20px;
   margin-left: 20px;
@@ -141,10 +141,21 @@
 
 .playermiddlebottom > #playermiddlebottomelements {
   display: inline-block;
+  width: 70%;
 }
 
-.playermiddlebottom > #playermiddlebottomtext {
+.playermiddlebottom > #playermiddlebottomtextright {
   display: inline-block;
   color: rgb(131, 131, 131);
   font-family: 'Open Sans', sans-serif;
+  width: 10%;
+  text-align: left;
+}
+
+.playermiddlebottom > #playermiddlebottomtextleft {
+  display: inline-block;
+  color: rgb(131, 131, 131);
+  font-family: 'Open Sans', sans-serif;
+  width: 10%;
+  text-align: right;
 }
