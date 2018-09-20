@@ -17,7 +17,7 @@ for (let i = 1; i < 101; i++) {
     let album = {
       albumID: i * 10 + j,
       albumName: faker.random.words(),
-      albumImage: coolImages.one(400, 400),
+      albumImage: "https://s3.us-east-2.amazonaws.com/spotifyalbumplayer/Album+Images/"+ j +".jpeg",
       publishedYear: Math.floor(Math.random() * 69) + 1950,
       songs: []
     }
