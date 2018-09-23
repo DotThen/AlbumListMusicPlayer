@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/artists');
+mongoose.connect('mongodb://root:WissemGamra1@ds211143.mlab.com:11143/artists');
 
 const db = mongoose.connection;
 
