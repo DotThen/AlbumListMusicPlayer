@@ -37,3 +37,30 @@ npm install -g webpack
 npm install
 ```
 
+## API
+
+Server supports all CRUD operations
+
+GET: Artists
+
+- Endpoint: /artists/albums/:artistID
+- Description: Will get all information associated with specified :artistID  
+- Response: contains object with artist data
+
+POST: Artists
+
+- Endpoint: /artists/albums
+- Description: Will add a complete artist object to the database.
+- Response: no response
+
+PUT: Artists
+
+- Endpoint: /artists/albums/:artistID
+- Description: Will update artist object for given artistID and object with properties and values to update
+- Response: no response
+
+DELETE: Artists
+
+- Endpoint: /artists/albums/:artistID
+- Description: Will delete artist object for given :artistID  
+- Response: no response

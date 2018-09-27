@@ -10,7 +10,7 @@ var generateData = () => {
       artistID: i,
       artistName: faker.name.findName(),
       albums: []
-    }
+    };
     var albumNumber = Math.floor(Math.random() * 4) + 1;
     for (let j = 1; j < albumNumber + 1; j++) {
       let album = {
@@ -19,7 +19,7 @@ var generateData = () => {
         albumImage: coolImages.one(400, 400),
         publishedYear: Math.floor(Math.random() * 69) + 1950,
         songs: []
-      }
+      };
       var songNumber = Math.floor(Math.random() * 10) + 12;
       for (let k = 1; k < songNumber + 1; k++) {
         let song = {
@@ -29,7 +29,7 @@ var generateData = () => {
           length: Math.floor(Math.random() * 221) + 30,
           popularity: Math.floor(Math.random() * 8) + 1,
           addedToLibrary: faker.random.boolean()
-        }
+        };
         album.songs.push(song);
       }
       artist.albums.push(album);
@@ -38,9 +38,9 @@ var generateData = () => {
   }
 
   fs.writeFile('data.json', JSON.stringify(allArtists), 'utf8', (err) => {
-    if (err) throw err;
-    console.log("File written!");
-  })
+    if (err) { throw err; }
+    console.log('File written!');
+  });
 };
 
 module.exports.generateData = generateData;
