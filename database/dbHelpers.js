@@ -1,6 +1,6 @@
 const { Artist } = require('./index.js');
 
-const getArtist = (id, cb) => {
+const findArtist = (id, cb) => {
   Artist.find({'artistID': id}, (err, data) => {
     if (err) {
       console.error('ERROR: ', err);
@@ -10,7 +10,7 @@ const getArtist = (id, cb) => {
   });
 };
 
-const postArtist = (artistObject, cb) => {
+const createArtist = (artistObject, cb) => {
   let newArtist = new Artist(artistObject);
   newArtist.save((err) => {
     if (err) {
@@ -42,8 +42,8 @@ const deleteArtist = (id, cb) => {
 };
 
 module.exports.dbHelpers = {
-  getArtist,
-  postArtist,
+  findArtist,
+  createArtist,
   updateArtist,
   deleteArtist
 };

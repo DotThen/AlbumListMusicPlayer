@@ -1,34 +1,34 @@
 const { dbHelpers } = require('../database/dbHelpers.js');
-const { getArtist, postArtist, updateArtist, deleteArtist } = dbHelpers;
+const { findArtist, createArtist, updateArtist, deleteArtist } = dbHelpers;
 
 
-const handleGet = (req, res) => {
-  getArtist(req.params.artistID, data => {
+const handleGetArtist = (req, res) => {
+  findArtist(req.params.artistID, data => {
     res.send(data);
   });
 };
 
-const handlePost = (req, res) => {
-  postArtist(req.body, () => {
+const handlePostArtist = (req, res) => {
+  createArtist(req.body, () => {
     res.status(201).send();
   });
 };
 
-const handleUpdate = (req, res) => {
+const handleUpdateArtist = (req, res) => {
   updateArtist(req.params.artistID, req.body, () => {
     res.status(204).send();
   });
 };
 
-const handleDelete = (req, res) => {
+const handleDeleteArtist = (req, res) => {
   deleteArtist(req.params.artistID, () => {
     res.status(204).send();
   });
 };
 
 module.exports.requestHandlers = {
-  handleGet,
-  handlePost,
-  handleUpdate,
-  handleDelete
+  handleGetArtist,
+  handlePostArtist,
+  handleUpdateArtist,
+  handleDeleteArtist
 };
