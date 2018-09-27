@@ -24,3 +24,7 @@ coverage
 build/
 dist/
 
+dataGen/data
+dataGen/images
+dataGen/webpImages
+
