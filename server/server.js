@@ -11,12 +11,12 @@ server.use(cors());
 server.use(express.urlencoded({ extended: true }));
 server.use(express.static(path.join(__dirname, '../public')));
 
-server.get('/artists/albums/:artistID', handleGet(req, res));
+server.get('/artists/albums/:artistID', handleGet);
 
-server.post('/artists/albums/:artistID', handlePost(req, res));
+server.post('/artists/albums', handlePost);
 
-server.put('/artists/albums/:artistID', handleUpdate(req, res));
+server.put('/artists/albums/:artistID', handleUpdate);
 
-server.delete('/artists/albums/:artistID', handleDelete(req, res));
+server.delete('/artists/albums/:artistID', handleDelete);
 
 module.exports = server;

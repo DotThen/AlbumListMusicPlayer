@@ -1,4 +1,4 @@
-const { Artist } = require('./index.js')
+const { Artist } = require('./index.js');
 
 const getArtist = (id, cb) => {
   Artist.find({'artistID': id}, (err, data) => {
@@ -18,7 +18,7 @@ const postArtist = (artistObject, cb) => {
     } else {
       cb();
     }
-  })
+  });
 };
 
 const updateArtist = (id, updatedParams, cb) => {
@@ -39,7 +39,8 @@ const deleteArtist = (id, cb) => {
       cb();
     }
   });
-}
+};
+
 module.exports.dbHelpers = {
   getArtist,
   postArtist,
