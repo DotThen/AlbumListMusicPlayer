@@ -1,13 +1,5 @@
 const faker = require('faker');
 
-const makeArtist = (id) => {
-  return {
-    artistID: id,
-    artistName: faker.name.findName(),
-    albums: []
-  };
-};
-
 const makeAlbum = (artistIndex, albumIndex) => {
   let randomImageIndex = Math.floor(Math.random() * 1000);
   return {
@@ -21,7 +13,7 @@ const makeAlbum = (artistIndex, albumIndex) => {
 
 const makeSong = (artIdx, albIdx, songIdx) => {
   return {
-    songID: i * 100 + j * 10 + k,
+    songID: artIdx * 100 + albIdx * 10 + songIdx,
     songName: faker.random.words(),
     streams: Math.floor(Math.random() * 250000000),
     length: Math.floor(Math.random() * 221) + 30,
@@ -30,8 +22,23 @@ const makeSong = (artIdx, albIdx, songIdx) => {
   };
 };
 
-module.exports.dataGenHelpers = {
-  makeArtist,
-  makeAlbum,
-  makeSong
+const makeArtist = (id) => {
+  let artist = {
+    artistID: id,
+    artistName: faker.name.findName(),
+    albums: []
+  };
+  let albumNumber = Math.floor(Math.random() * 4) + 1;
+  for (let j = 1; j < albumNumber + 1; j++) {
+    let album = makeAlbum(id, j);
+    let songNumber = Math.floor(Math.random() * 10) + 12;
+    for (let k = 1; k < songNumber + 1; k++) {
+      let song = makeSong(id, j, k);
+      album.songs.push(song);
+    }
+    artist.albums.push(album);
+  }
+  return artist;
 };
+
+module.exports.makeArtist = makeArtist;
