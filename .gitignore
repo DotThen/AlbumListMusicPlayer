@@ -1,6 +1,9 @@
 ## MAC files ##
 .DS_Store
 
+## NODE ENV ##
+.env
+
 ## NPM ##
 npm
 npm-debug.log
