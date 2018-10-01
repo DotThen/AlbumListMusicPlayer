@@ -23,21 +23,25 @@ const makeSong = (artIdx, albIdx, songIdx) => {
 };
 
 const makeArtist = (id) => {
-  let artist = {
+  return {
     artistID: id,
     artistName: faker.name.findName(),
     albums: []
   };
-  // let albumNumber = faker.random.number({min: 1, max: 4});
-  for (let j = 1; j < 3; j++) {
+};
+
+const generateData = (id) => {
+  let artist = makeArtist(id);
+  for (let j = 1; j < 4; j++) {
     let album = makeAlbum(id, j);
-    // let songNumber = faker.random.number({min: 12, max: 21});
-    for (let k = 1; k < 13; k++) {
+    for (let k = 1; k < 14; k++) {
       album.songs.push(makeSong(id, j, k));
     }
     artist.albums.push(album);
   }
   return artist;
 };
-
+module.exports.generateData = generateData;
 module.exports.makeArtist = makeArtist;
+module.exports.makeAlbum = makeAlbum;
+module.exports.makeSong = makeSong;
