@@ -61,20 +61,20 @@ const writeSongCSV = (index, songID) => new Promise((resolve, reject) => {
 });
 
 const generateDataCSV = async () => {
-  let artistID = 1;
-  for (let i = 1; i <= 1000; i++) {
-    await writeArtistCSV(i, artistID);
-    artistID += 10000;
-  }
+  // let artistID = 1;
+  // for (let i = 1; i <= 1000; i++) {
+  //   await writeArtistCSV(i, artistID);
+  //   artistID += 10000;
+  // }
   
-  let albumID = 1;
-  for (let j = 1; j <= 3000; j++) {
-    await writeAlbumCSV(j, albumID);
-    albumID += 10000;
-  }
+  // let albumID = 1;
+  // for (let j = 1; j <= 3000; j++) {
+  //   await writeAlbumCSV(j, albumID);
+  //   albumID += 10000;
+  // }
   
-  let songID = 1;
-  for (let k = 1; k <= 13000; k++) {
+  let songID = 130000001;
+  for (let k = 1; k <= 26000; k++) {
     await writeSongCSV(k, songID);
     songID += 10000;
   }
