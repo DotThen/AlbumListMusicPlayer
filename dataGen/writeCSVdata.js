@@ -11,14 +11,13 @@ const makeAlbumCSV = (albumID) => {
 };
 
 const makeSongCSV = (songID) => {
-  let artistID = faker.random.number({min: 1, max: 10000000});
   let albumID = faker.random.number({min: 1, max: 30000000});
   let songName = faker.random.words();
   let streams = faker.random.number(250000000);
   let length = faker.random.number({min: 30, max: 250});
   let popularity = faker.random.number({min: 1, max: 9});
   let addedToLibrary = faker.random.boolean();
-  return `${songID}|${albumID}|${artistID}|${songName}|${streams}|${length}|${popularity}|${addedToLibrary}\n`;
+  return `${songID}|${albumID}|${songName}|${streams}|${length}|${popularity}|${addedToLibrary}\n`;
 };
 
 const makeArtistCSV = (id) => {
@@ -55,7 +54,7 @@ const writeSongCSV = (index, songID) => new Promise((resolve, reject) => {
     songStream.write(makeSongCSV(i), 'utf8');
   }
   songStream.end(() => {
-    console.log(`Wrote songs ${songID} to ${songID + 10000}`);
+    console.log(`Wrote songs ${songID} to ${songID + 1000000}`);
   });
   songStream.on('finish', resolve);
 });
@@ -72,11 +71,11 @@ const generateDataCSV = async () => {
   //   await writeAlbumCSV(j, albumID);
   //   albumID += 10000;
   // }
-  
+  // write new songs files first thing in the morning ! maybe even over night
   let songID = 130000001;
-  for (let k = 1; k <= 26000; k++) {
+  for (let k = 1; k <= 390; k++) {
     await writeSongCSV(k, songID);
-    songID += 10000;
+    songID += 1000000;
   }
 };
 

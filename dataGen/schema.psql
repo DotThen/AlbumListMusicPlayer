@@ -16,7 +16,6 @@ CREATE TABLE albums (
 CREATE TABLE songs (
   id INT PRIMARY KEY,
   album_id INT REFERENCES albums(id),
-  artist_id INT REFERENCES artists(id),
   name TEXT,
   streams INT,
   length INT,
