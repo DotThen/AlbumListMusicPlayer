@@ -3,27 +3,26 @@ const { findArtist, createArtist, updateArtist, deleteArtist } = dbHelpers;
 
 
 const handleGetArtist = (req, res) => {
-  findArtist(req.params.artistID, data => {
-    res.send(data);
-  });
+  findArtist(parseInt(req.params.artistID, 10), res);
 };
 
 const handlePostArtist = (req, res) => {
-  createArtist(req.body, () => {
-    res.status(201).send();
-  });
+  createArtist(req.body, res);
 };
 
 const handleUpdateArtist = (req, res) => {
-  updateArtist(req.params.artistID, req.body, () => {
-    res.status(204).send();
-  });
+  updateArtist(
+    parseInt(req.params.artistID, 10),
+    { 
+      artistName: req.body.artistName,
+      albums: req.body.albums
+    },
+    res
+  );
 };
 
 const handleDeleteArtist = (req, res) => {
-  deleteArtist(req.params.artistID, () => {
-    res.status(204).send();
-  });
+  deleteArtist(parseInt(req.params.artistID, 10), res);
 };
 
 module.exports.requestHandlers = {
