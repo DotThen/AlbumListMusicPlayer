@@ -50,7 +50,7 @@ const writeAlbumCSV = (index, albumID) => new Promise((resolve, reject) => {
 
 const writeSongCSV = (index, songID) => new Promise((resolve, reject) => {
   let songStream = fs.createWriteStream(`dataGen/CSVdata/songs/songs${index}.csv`);
-  for (let i = songID; i < songID + 10000; i++) {
+  for (let i = songID; i < songID + 1000000; i++) {
     songStream.write(makeSongCSV(i), 'utf8');
   }
   songStream.end(() => {
@@ -60,19 +60,19 @@ const writeSongCSV = (index, songID) => new Promise((resolve, reject) => {
 });
 
 const generateDataCSV = async () => {
-  // let artistID = 1;
-  // for (let i = 1; i <= 1000; i++) {
-  //   await writeArtistCSV(i, artistID);
-  //   artistID += 10000;
-  // }
+  let artistID = 1;
+  for (let i = 1; i <= 1000; i++) {
+    await writeArtistCSV(i, artistID);
+    artistID += 10000;
+  }
   
-  // let albumID = 1;
-  // for (let j = 1; j <= 3000; j++) {
-  //   await writeAlbumCSV(j, albumID);
-  //   albumID += 10000;
-  // }
-  // write new songs files first thing in the morning ! maybe even over night
-  let songID = 130000001;
+  let albumID = 1;
+  for (let j = 1; j <= 3000; j++) {
+    await writeAlbumCSV(j, albumID);
+    albumID += 10000;
+  }
+
+  let songID = 1;
   for (let k = 1; k <= 390; k++) {
     await writeSongCSV(k, songID);
     songID += 1000000;
