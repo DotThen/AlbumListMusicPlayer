@@ -30,10 +30,10 @@ class App extends React.Component {
       url: "/artists/albums/" + artistId,
       success: (data) => {
         this.setState({
-          artist: data[0],
+          artist: data,
           artistID: artistId,
-          artistName: data[0].artistName,
-          albums: data[0].albums
+          artistName: data.artistName,
+          albums: data.albums
         })
       }
     })

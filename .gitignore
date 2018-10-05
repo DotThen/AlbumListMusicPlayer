@@ -1,6 +1,9 @@
 ## MAC files ##
 .DS_Store
 
+## NODE ENV ##
+.env
+
 ## NPM ##
 npm
 npm-debug.log
@@ -23,4 +26,10 @@ coverage
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
 dist/
+
+# DATA
+dataGen/data
+dataGen/images
+dataGen/webpImages
+dataGen/CSVdata
 
