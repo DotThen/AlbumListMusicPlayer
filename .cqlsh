@@ -1,4 +1,4 @@
-create type sdc. song ( 
+create type sdc.song ( 
   "songID" int, 
   "songName" text, 
   streams int, 
@@ -6,7 +6,7 @@ create type sdc. song (
   popularity int, 
   "addedToLibrary" Boolean 
 );
-create type sdc. album ( 
+create type sdc.album ( 
   "albumID" int, 
   "albumName" text, 
   "albumImage" text, 

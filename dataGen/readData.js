@@ -1,3 +1,4 @@
+// DEPRICATED
 require('dotenv').config();
 const bluebird = require('bluebird');
 const fs = bluebird.promisifyAll(require('fs'));
@@ -24,7 +25,7 @@ const seedAsync = (artistObj) => new Promise((resolve, reject) => {
 })
 
 const readAsync = (index) => new Promise((resolve, reject) => {
-  fs.readFile(`../data/data${index}.json`, (err, data) => {
+  fs.readFile(`data/data${index}.json`, (err, data) => {
     let artists = JSON.parse(data);
     loopSave(artists, resolve);
   });
