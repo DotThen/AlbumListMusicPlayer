@@ -1,18 +1,19 @@
 require('dotenv').config();
 const ExpressCassandra = require('express-cassandra');
 
-let host = process.env.DB_HOST || '127.0.0.1';
-let user = process.env.DB_USER;
-let password = process.env.DB_PASSWORD;
+let host = process.env.DB_HOST || '18.222.194.221';
 let dbName = process.env.DB_NAME || 'sdc';
 
 const models = ExpressCassandra.createClient({
   clientOptions: {
     contactPoints: [host],
     protocolOptions: { port: 9042 },
+    socketOptions: { 
+      // connectTimeout: 1000,
+      // readTimeout: 2500
+    },
     keyspace: dbName,
-    queryOptions: {consistency: ExpressCassandra.consistencies.one},
-    authProvider: new ExpressCassandra.driver.auth.PlainTextAuthProvider(user, password)
+    queryOptions: {consistency: ExpressCassandra.consistencies.one}
   }, 
   ormOptions: {
     defaultReplicationStrategy: {

@@ -32,9 +32,11 @@ const makeArtist = (id) => {
 
 const generateData = (id) => {
   let artist = makeArtist(id);
-  for (let j = 1; j < 4; j++) {
+  let albumNumber = Math.floor(Math.random() * 4) + 1;
+  for (let j = 1; j <= albumNumber; j++) {
     let album = makeAlbum(id, j);
-    for (let k = 1; k < 14; k++) {
+    let songNumber = Math.floor(Math.random() * 10) + 12;
+    for (let k = 1; k <= songNumber; k++) {
       album.songs.push(makeSong(id, j, k));
     }
     artist.albums.push(album);
