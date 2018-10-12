@@ -25,10 +25,10 @@
     "express-cassandra": "^2.2.3",
     "fs": "0.0.1-security",
     "jquery": "^3.1.1",
-    "toobusy-js": "^0.5.1"
+    "toobusy-js": "^0.5.1",
+    "newrelic": "^4.9.0"
   },
   "devDependencies": {
-    "line-reader": "^0.4.0",
-    "newrelic": "^4.9.0"
+    "line-reader": "^0.4.0"
   }
 }
