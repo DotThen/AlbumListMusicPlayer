@@ -25,7 +25,7 @@ const readAsync = (index) => new Promise((resolve, reject) => {
       artistName: rawArtist.artistName,
       albums: rawArtist.albums
     });
-    if (rawArtist.artistID % 2000 === 0) {
+    if (rawArtist.artistID % 10000 === 0) {
       console.log('saving artist ' + rawArtist.artistID);
     }
     saveArtist(artist, resolve);
