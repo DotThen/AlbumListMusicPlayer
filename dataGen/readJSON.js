@@ -1,5 +1,7 @@
 require('dotenv').config();
 const lineReader = require('line-reader');
+const Promise = require('bluebird');
+const eachLine = Promise.promisify(lineReader.eachLine);
 const fs = require('fs');
 const { ArtistsModel } = require('../database/models/Artist.js')
 
@@ -9,20 +11,21 @@ const saveArtist = async (artist, cb) => {
 }
 
 const seedAsync = (artistObj) => new Promise((resolve, reject) => {
-  artistObj.saveAsync({if_not_exist: true})
+  artistObj.saveAsync()
   .then(resolve);
 })
 
 const readAsync = (index) => new Promise((resolve, reject) => {
-  let readStream = fs.createReadStream(`../data/data${index}.json`);
-  lineReader.eachLine(readStream, (line) => {
+  // FIX
+  let readStream = fs.createReadStream(`dataGen/data/data${index}.json`);
+  eachLine(readStream, (line) => {
     let rawArtist = JSON.parse(line);
     let artist = new ArtistsModel({
       artistID: rawArtist.artistID,
       artistName: rawArtist.artistName,
       albums: rawArtist.albums
     });
-    if (rawArtist.artistID % 10000 === 0) {
+    if (rawArtist.artistID % 2000 === 0) {
       console.log('saving artist ' + rawArtist.artistID);
     }
     saveArtist(artist, resolve);
@@ -33,9 +36,11 @@ const readAsync = (index) => new Promise((resolve, reject) => {
 })
 
 const loopRead = async () => {
-  for (let i = 1; i < 1001; i++) {
-    await readAsync(1);
-    break;
+  for (let i = 2; i < 5; i++) {
+    // FIX 
+    await readAsync(i);
+    // FIX
+    // break;
   }
 }
 

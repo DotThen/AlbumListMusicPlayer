@@ -9,8 +9,8 @@ const models = ExpressCassandra.createClient({
     contactPoints: [host],
     protocolOptions: { port: 9042 },
     socketOptions: { 
-      // connectTimeout: 1000,
-      // readTimeout: 2500
+      connectTimeout: 1000,
+      readTimeout: 2500
     },
     keyspace: dbName,
     queryOptions: {consistency: ExpressCassandra.consistencies.one}
