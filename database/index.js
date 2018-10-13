@@ -1,7 +1,7 @@
 require('dotenv').config();
 const ExpressCassandra = require('express-cassandra');
 
-let host = process.env.DB_HOST || '18.222.194.221';
+let host = process.env.DB_HOST || '52.14.95.181';
 let dbName = process.env.DB_NAME || 'sdc';
 
 const models = ExpressCassandra.createClient({

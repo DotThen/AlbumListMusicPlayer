@@ -17,7 +17,7 @@ const seedAsync = (artistObj) => new Promise((resolve, reject) => {
 
 const readAsync = (index) => new Promise((resolve, reject) => {
   // FIX
-  let readStream = fs.createReadStream(`dataGen/data/data${index}.json`);
+  let readStream = fs.createReadStream(`~/data1/data${index}.json`);
   eachLine(readStream, (line) => {
     let rawArtist = JSON.parse(line);
     let artist = new ArtistsModel({
@@ -36,11 +36,8 @@ const readAsync = (index) => new Promise((resolve, reject) => {
 })
 
 const loopRead = async () => {
-  for (let i = 2; i < 5; i++) {
-    // FIX 
+  for (let i = 1; i < 201; i++) {
     await readAsync(i);
-    // FIX
-    // break;
   }
 }
 
