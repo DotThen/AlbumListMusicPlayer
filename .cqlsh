@@ -1,0 +1,21 @@
+create type sdc.song ( 
+  "songID" int, 
+  "songName" text, 
+  streams int, 
+  length int, 
+  popularity int, 
+  "addedToLibrary" Boolean 
+);
+create type sdc.album ( 
+  "albumID" int, 
+  "albumName" text, 
+  "albumImage" text, 
+  "publishedYear" int, 
+  songs list<frozen<song>> 
+);
+create table artists( 
+  "artistID" int, 
+  "artistName" text, 
+  albums list<frozen<album>>, 
+  primary key ("artistID") 
+);

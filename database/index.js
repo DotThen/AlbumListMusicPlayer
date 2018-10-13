@@ -1,37 +1,27 @@
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://root:WissemGamra1@ds211143.mlab.com:11143/artists');
+require('dotenv').config();
+const ExpressCassandra = require('express-cassandra');
 
-const db = mongoose.connection;
+let host = process.env.DB_HOST || '52.14.95.181';
+let dbName = process.env.DB_NAME || 'sdc';
 
-
-const ArtistSchema = new mongoose.Schema({
-  artistID: Number,
-  artistName: String,
-  albums: [{
-    albumID: Number,
-    albumName: String,
-    albumImage: String,
-    publishedYear: Number,
-    songs: [{
-      songID: Number,
-      songName: String,
-      streams: Number,
-      length: Number,
-      popularity: Number,
-      addedToLibrary: Boolean
-    }]
-  }]
+const models = ExpressCassandra.createClient({
+  clientOptions: {
+    contactPoints: [host],
+    protocolOptions: { port: 9042 },
+    socketOptions: { 
+      connectTimeout: 1000,
+      readTimeout: 2500
+    },
+    keyspace: dbName,
+    queryOptions: {consistency: ExpressCassandra.consistencies.one}
+  }, 
+  ormOptions: {
+    defaultReplicationStrategy: {
+      class: 'SimpleStrategy',
+      replication_factor: 3
+    },
+    migration: 'safe',
+  }
 });
 
-var Artist = mongoose.model('Artist', ArtistSchema);
-
-var getArtist = (id, cb) => {
-  Artist.find({'artistID': id}, (err, data) => {
-    if (err) throw err;
-    cb(data);
-  })
-}
-
-module.exports.Artist = Artist;
-module.exports.db = db;
-module.exports.getArtist = getArtist;
+module.exports.models = models;
